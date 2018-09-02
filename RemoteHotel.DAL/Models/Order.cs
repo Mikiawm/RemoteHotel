@@ -6,7 +6,6 @@ using System.Web;
 
 namespace RemoteHotel.DAL.Models
 {
-    [Table("Order")]
     public class Order
     {
         public int Id { get; set; }
