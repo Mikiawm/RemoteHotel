@@ -7,21 +7,22 @@ using System.Web;
 
 namespace RemoteHotel.DAL.Models
 {
-    [Table("Room")]
     public class Room
     {
         public int Id { get; set; }
 
-        [Required]
         public string RoomNumber { get; set; }
 
-        [Required]
         public bool Status { get; set; }
 
-        [Required]
         public int Standard { get; set; }
 
-        [Required]
         public int Beds { get; set; }
+
+        public virtual ICollection<CustomerRoom> CustomerRooms { get; set; }
+
+        public virtual Hotel CurrentHotel{ get; set; }
+
+        public int CurrentHotelId { get; set; }
     }
 }

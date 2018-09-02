@@ -80,13 +80,19 @@
     <Compile Include="Extensions\IQueryableExtensions.cs" />
     <Compile Include="Interfaces\IQueryResources.cs" />
     <Compile Include="Methods\AccountRepository.cs" />
+    <Compile Include="Methods\CustomerRepository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
+    <Compile Include="Migrations\201809011646277_InitialModel.cs" />
+    <Compile Include="Migrations\201809011646277_InitialModel.Designer.cs">
+      <DependentUpon>201809011646277_InitialModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\CustomerRoom.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteHotelConfiguration.cs" />
     <Compile Include="RemoteHotelContext.cs" />
@@ -100,7 +106,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809011646277_InitialModel.resx">
+      <DependentUpon>201809011646277_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -20,17 +20,69 @@ namespace RemoteHotel.DAL
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<CustomerRoom> CustomerRooms { get; set; }          
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            //modelBuilder.Entity<Course>()
-            //.HasMany(c => c.Instructors).WithMany(i => i.Courses)
-            //    .Map(t => t.MapLeftKey("CourseID")
-            //.MapRightKey("InstructorID")
-            //    .ToTable("CourseInstructor"));
+            modelBuilder.Entity<CustomerRoom>()
+                .HasRequired(t => t.Customer)
+                .WithMany(t => t.CustomerRooms)
+                .HasForeignKey(t => t.CustomerId);
 
-            //modelBuilder.Entity<Department>().MapToStoredProcedures();
+            modelBuilder.Entity<CustomerRoom>()
+                .HasRequired(t => t.Room)
+                .WithMany(t => t.CustomerRooms)
+                .HasForeignKey(t => t.RoomId);
+
+            modelBuilder.Entity<CustomerRoom>()
+                .Property(t => t.RoomKey)
+                .IsRequired();
+
+            modelBuilder.Entity<Room>()
+                .Property(t => t.RoomNumber)
+                .IsRequired();
+
+            modelBuilder.Entity<Room>()
+                .Property(t => t.Status)
+                .IsRequired();
+
+            modelBuilder.Entity<Room>()
+                .Property(t => t.Beds)
+                .IsRequired();
+
+            modelBuilder.Entity<Room>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Hotel>()
+                .HasMany<Room>(t => t.Rooms)
+                .WithRequired(t => t.CurrentHotel)
+                .HasForeignKey<int>(t => t.CurrentHotelId);
+
+            modelBuilder.Entity<Hotel>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<Hotel>()
+                .Property(t => t.HotelName)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<User>()
+                .Property(t => t.AccountType)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(t => t.Login)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(t => t.Password)
+                .IsRequired();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

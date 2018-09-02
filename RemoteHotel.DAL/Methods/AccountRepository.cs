@@ -53,7 +53,6 @@ namespace RemoteHotel.DAL.Methods
             try
             {
                 var result = await _context.Users.FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
-                var result2 = await _context.Users.Where(x => x.Login == login && x.Password == password).FirstOrDefaultAsync();
 
                 return result;
             }

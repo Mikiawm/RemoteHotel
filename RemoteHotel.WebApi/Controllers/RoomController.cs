@@ -10,7 +10,7 @@ using RemoteHotel.DAL.Methods;
 using RemoteHotel.DAL.Models;
 
 namespace RemoteHotel.WebApi.Controllers
-{
+{ 
 
    
 }
