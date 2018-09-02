@@ -27,7 +27,7 @@ namespace RemoteHotel.WebApi.Controllers
         {
             try
             {
-                var user = await this._repository.GetUserByLogin(login, password);
+                var user = await this._repository.(login, password);
                 return user;
             }
             catch (Exception ex)

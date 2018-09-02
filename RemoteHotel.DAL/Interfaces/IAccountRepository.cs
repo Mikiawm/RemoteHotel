@@ -8,6 +8,8 @@ namespace RemoteHotel.DAL.Interfaces
 {
     public interface IAccountRepository : IRepository<User>
     {
+        User GetUserByLoginPassword(string login, string password);
+        IEnumerable<User> GetUsersByLogin(string login);
 
     }
 }

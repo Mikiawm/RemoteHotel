@@ -11,16 +11,24 @@ namespace RemoteHotel.DAL.Methods
 {
     public class AccountRepository : Repository<User>, IAccountRepository
     {
-        private readonly RemoteHotelContext _context;
 
         public AccountRepository(RemoteHotelContext context)
             : base(context)
         {
         }
 
-        //public RemoteHotelContext RemoteHotelContext
-        //{
-        //    get { return Context as RemoteHotelContext; }
-        //}
+        public User GetUserByLoginPassword(string login, string password)
+        {
+            return RemoteHotelContext.Users.FirstOrDefault(c => c.Login == login && c.Password == password);
+        }
+
+        public IEnumerable<User> GetUsersByLogin(string login)
+        {
+            return RemoteHotelContext.Users.Where(u => u.Login == login);
+        }
+        public RemoteHotelContext RemoteHotelContext
+        {
+            get { return Context as RemoteHotelContext; }
+        }
     }
 }
