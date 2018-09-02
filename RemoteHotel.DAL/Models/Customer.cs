@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace RemoteHotel.DAL.Models
 {
-    [Table("Customer")]
     public class Customer
     {
-        [Required]
         public int Id { get; set; }
 
         public string FirstName { get; set; }
