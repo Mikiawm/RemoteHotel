@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Eurowings Service App";
+}
+<div class="container">
+
+
+    <div class="card card-container">
+        <span id="profile-img" class="profile-img-card glyphicon glyphicon-user">
+        </span>
+        <div class="form-horizontal">
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+
+                    @Html.TextBox("Login", "", new { @id = "inputLogin", @class = "form-control", placeholder = "Login" })
+                    <div class="errorMessage">
+                        @Html.ValidationMessage("Password")
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    @Html.TextBox("Password", "", new { @id = "inputPassword", @class = "form-control", placeholder = "Password", type = "password" })
+                    <div class="errorMessage">
+                        @Html.ValidationMessage("Password")
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button id="loginButton" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Log in</button>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

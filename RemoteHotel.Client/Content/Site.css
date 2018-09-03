@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 75px;
     padding-bottom: 20px;
 }
 
@@ -16,9 +16,289 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+/*
+ * Specific styles of signin component
+ */
+/*
+ * General styles
+ */
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.card-container.card {
+    max-width: 350px;
+    padding: 40px 40px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+/*
+ * Card component
+ */
+.card {
+    background-color: white;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    color: gray;
+    font-size: 96px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+body {
+    background-color: #F7F7F7;
+}
+/*
+ * Form styles
+ */
+.profile-name-card {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 0;
+    min-height: 1em;
+}
+
+.reauth-email {
+    display: block;
+    color: #404040;
+    line-height: 2;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    border-color: rgb(104, 145, 162);
+    outline: 0;
+}
+
+.btn.btn-signin {
+    background-color: #8C134D;
+    padding: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-brand {
+    padding: 0;
+    margin-left: 10px;
+}
+
+#input-password {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.navbar-fixed-top {
+    border-bottom: 1px solid #EDEDED;
+    background-color: white;
+}
+
+.navbar-text {
+    font-size: 24px;
+    color: #903059;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: -1;
+}
+
+.navbar-right {
+    font-size: 36px;
+    margin: 5px 10px 5px 10px;
+    cursor: pointer;
+    float: right;
+}
+
+.form-horizontal {
+    margin-top: 40px;
+}
+/*.panel-body {
+    margin-left: -15px;
+    margin-right: 15px;
+}*/
+.black-color {
+    color: black;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.glyphicon-plane:before {
+    content: "\e108";
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    display: inline-block;
+}
+
+.line-right {
+    border-right: 1px solid #EAEAEA;
+}
+
+.h4-no-margin {
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+}
+
+.glyphicon-refresh:before {
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+}
+
+.float-right {
+    float: right;
+}
+
+.navbar-brand {
+    cursor: pointer;
+}
+
+.glyphicon-log-out {
+    vertical-align: top;
+    top: 2px;
+}
+
+#dropdownMenu1 {
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.errorMessage {
+    color: red;
+    padding: 6px 12px;
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 0px;
+}
+
+.euro-color {
+    color: #8D2B55;
+}
+
+.thumbnail {
+    margin-bottom: 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.text-center-flightNumber {
+    padding-right: 30px;
+    padding-left: 0px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+}
+
+.flight-panel-body {
+    margin-top: 60px;
+    text-align: center;
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 30px;
+}
+
+.navbar-header {
+    float: left;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #8D2B55; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 5px auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    text-align: center;
+    font-size: 24px;
+}
+/* Colorbox */
+#colorbox {
+    background-color: #FFF; /* Add a color of your choice */
+}
+
+#cboxLoadedContent {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    word-wrap: break-word !important;
+}
+
+#Impressum {
+    cursor: pointer;
+}
+
+#Imprint {
+    cursor: pointer;
 }

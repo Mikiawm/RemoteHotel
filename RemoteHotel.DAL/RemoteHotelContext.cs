@@ -20,23 +20,23 @@ namespace RemoteHotel.DAL
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<CustomerRoom> CustomerRooms { get; set; }          
+        public DbSet<Rental> CustomerRooms { get; set; }          
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<CustomerRoom>()
+            modelBuilder.Entity<Rental>()
                 .HasRequired(t => t.Customer)
                 .WithMany(t => t.CustomerRooms)
                 .HasForeignKey(t => t.CustomerId);
 
-            modelBuilder.Entity<CustomerRoom>()
+            modelBuilder.Entity<Rental>()
                 .HasRequired(t => t.Room)
                 .WithMany(t => t.CustomerRooms)
                 .HasForeignKey(t => t.RoomId);
 
-            modelBuilder.Entity<CustomerRoom>()
+            modelBuilder.Entity<Rental>()
                 .Property(t => t.RoomKey)
                 .IsRequired();
 

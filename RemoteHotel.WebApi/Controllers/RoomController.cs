@@ -10,7 +10,10 @@ using RemoteHotel.DAL.Methods;
 using RemoteHotel.DAL.Models;
 
 namespace RemoteHotel.WebApi.Controllers
-{ 
+{
+    [RoutePrefix("api")]
+    public class RoomController : ApiController
+    {
 
-   
+    }
 }

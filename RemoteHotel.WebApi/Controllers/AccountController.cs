@@ -14,11 +14,11 @@ namespace RemoteHotel.WebApi.Controllers
     [RoutePrefix("api")]
     public class AccountController : ApiController
     {
-        private readonly AccountRepository _repository;
+        private readonly UnitOfWork _unitOfWork;
 
         public AccountController()
         {
-            this._repository = new AccountRepository(new RemoteHotelContext());
+            this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
 
         [HttpGet]
@@ -27,7 +27,7 @@ namespace RemoteHotel.WebApi.Controllers
         {
             try
             {
-                var user = this._repository.GetUserByLoginPassword(login, password);
+                User user = this._unitOfWork.Accounts.GetUserByLoginPassword(login, password);
                 return user;
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace RemoteHotel.WebApi.Controllers
         {
             try
             {
-                var users = this._repository.GetUsersByLogin(login);
+                var users = this._unitOfWork.Accounts.GetUsersByLogin(login);
                 return users;
             }
             catch (Exception ex)

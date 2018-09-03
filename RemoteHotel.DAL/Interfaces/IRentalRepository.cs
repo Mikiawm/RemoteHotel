@@ -6,7 +6,9 @@ using RemoteHotel.DAL.Models;
 
 namespace RemoteHotel.DAL.Interfaces
 {
-    public interface ICustomerRoomRepository : IRepository<CustomerRoom>
+    public interface IRentalRepository : IRepository<Rental>
     {
+        void Add(Customer customer, Room room, string key, DateTime expireDateTime);
+
     }
 }

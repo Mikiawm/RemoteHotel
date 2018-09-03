@@ -7,7 +7,7 @@ using System.Web;
 
 namespace RemoteHotel.DAL.Models
 {
-    public class CustomerRoom
+    public class Rental
     {
         [Key, Column(Order = 0)]
         public int CustomerId { get; set; }
@@ -19,5 +19,10 @@ namespace RemoteHotel.DAL.Models
         public virtual Customer Customer { get; set; }
 
         public string RoomKey { get; set; }
+
+        public DateTime CreateDateTime { get; set; }
+
+        public DateTime ExpiredDAteTime { get; set; }
+
     }
 }

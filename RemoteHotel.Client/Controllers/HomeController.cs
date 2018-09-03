@@ -1,30 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using RemoteHotel.Client.Models;
+using RemoteHotel.Client.Services;
 
 namespace RemoteHotel.Client.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult Login()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginModel loginModel)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            LoginService loginService = new LoginService();
+            
+            if (ModelState.IsValid)
+            {
+                var isExist = loginService.LoginToApp(loginModel.Login, loginModel.Password); 
+                if (isExist)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            return View(loginModel);
         }
+
+
     }
 }
