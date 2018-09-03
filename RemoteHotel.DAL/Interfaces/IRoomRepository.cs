@@ -8,6 +8,6 @@ namespace RemoteHotel.DAL.Interfaces
 {
     public interface IRoomRepository : IRepository<Room>
     {
-        
+        Room Get(string roomNumber);
     }
 }

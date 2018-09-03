@@ -16,5 +16,10 @@ namespace RemoteHotel.DAL.Methods
         {
             this._context = context;
         }
+
+        public Room Get(string roomNumber)
+        {
+            return _context.Rooms.FirstOrDefault(x => x.RoomNumber == roomNumber);
+        }
     }
 }
