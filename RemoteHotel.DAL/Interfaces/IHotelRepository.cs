@@ -6,9 +6,8 @@ using RemoteHotel.DAL.Models;
 
 namespace RemoteHotel.DAL.Interfaces
 {
-    public interface IRoomRepository : IRepository<Room>
+    public interface IHotelRepository : IRepository<Hotel>
     {
-        Room Get(string roomNumber);
-        IEnumerable<Room> GetRoomsByHotelId(int hotelId);
+
     }
 }

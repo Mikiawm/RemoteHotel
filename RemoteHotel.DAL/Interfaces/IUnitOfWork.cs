@@ -10,6 +10,7 @@ namespace RemoteHotel.DAL.Interfaces
         IRoomRepository Rooms { get; }
         IAccountRepository Accounts { get; }
         ICustomerRepository Customers { get; }
+        IHotelRepository Hotels { get; }
         int Complete();
     }
 }

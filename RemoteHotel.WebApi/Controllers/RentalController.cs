@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -28,6 +29,18 @@ namespace RemoteHotel.WebApi.Controllers
                 unitOfWork.Rentals.Add(customer, room, roomCode, expiredDateTime);
             }
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("rental/getAll")]
+        public IHttpActionResult GetAllRental()
+        {
+            IEnumerable<Rental> rentals;
+            using (var unitOfWork = new UnitOfWork(new RemoteHotelContext()))
+            {
+                rentals = unitOfWork.Rentals.GetAll();
+            }
+            return Ok(rentals);
         }
     }
 }

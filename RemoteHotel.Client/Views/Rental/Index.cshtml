@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@model RemoteHotel.Client.Models.RentalModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Customer: @Model.Customer.CustomerName</h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            RoomNumber: @Model.Room.RoomNumber
+        </li>
+        <li class="list-group-item">
+            Rental expiredTime: @Model.ExpiredDate
+        </li>
+        <li class="list-group-item">
+            Password to room: @Model.RentalPassword
+        </li>
+    </ul>
+</div>

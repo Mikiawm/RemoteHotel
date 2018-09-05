@@ -80,6 +80,7 @@
     <Compile Include="Extensions\IQueryableExtensions.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\IHotelRepository.cs" />
     <Compile Include="Interfaces\IRentalRepository.cs" />
     <Compile Include="Interfaces\IQueryResources.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Methods\AccountRepository.cs" />
     <Compile Include="Methods\CustomerRepository.cs" />
+    <Compile Include="Methods\HotelRepository.cs" />
     <Compile Include="Methods\RentalRepository.cs" />
     <Compile Include="Methods\Repository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
