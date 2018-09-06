@@ -41,7 +41,7 @@ namespace RemoteHotel.DAL.Migrations
             context.Rooms.AddOrUpdate(x => x.Id, new Room()
             {
                 Id = 1,
-                Status = true,
+                Status = 1,
                 Beds = 2,
                 RoomNumber = "123",
                 Standard = 1,
@@ -49,7 +49,7 @@ namespace RemoteHotel.DAL.Migrations
             }, new Room()
             {
                 Id = 2,
-                Status = false,
+                Status = 2,
                 Beds = 2,
                 RoomNumber = "223",
                 Standard = 1,

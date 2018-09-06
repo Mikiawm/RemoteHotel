@@ -13,7 +13,7 @@ namespace RemoteHotel.DAL.Models
 
         public string RoomNumber { get; set; }
 
-        public bool Status { get; set; }
+        public int Status { get; set; }
 
         public int Standard { get; set; }
 

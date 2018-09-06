@@ -10,5 +10,7 @@ namespace RemoteHotel.DAL.Interfaces
     {
         Room Get(string roomNumber);
         IEnumerable<Room> GetRoomsByHotelId(int hotelId);
+        bool OpenRoom(string rentalCode, string roomNumber);
+        bool CloseRoom(string rentalCode, string roomNumber);
     }
 }

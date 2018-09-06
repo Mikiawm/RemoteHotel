@@ -39,5 +39,13 @@ namespace RemoteHotel.WebApi.Controllers
                 throw new HttpResponseException(resp);
             }
         }
+
+        [HttpGet]
+        [Route("room/openRoom/{rentalCode}")]
+        public bool OpenRoom(string rentalCode)
+        {
+            throw new NotImplementedException();
+
+        }
     }
 }
