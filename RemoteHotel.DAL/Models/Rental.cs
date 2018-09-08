@@ -9,10 +9,10 @@ namespace RemoteHotel.DAL.Models
 {
     public class Rental
     {
-        [Key, Column(Order = 0)]
+        public int RentalId { get; set; }
+
         public int CustomerId { get; set; }
 
-        [Key, Column(Order = 1)]
         public int RoomId { get; set; }
 
         public virtual Room Room { get; set; }
@@ -22,7 +22,7 @@ namespace RemoteHotel.DAL.Models
 
         public DateTime CreateDateTime { get; set; }
 
-        public DateTime ExpiredDAteTime { get; set; }
+        public DateTime ExpiredDateTime { get; set; }
 
     }
 }

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity.Validation;
 using System.Linq;
+using System.Text;
 using System.Web;
 using RemoteHotel.DAL.Models;
 
@@ -20,7 +22,7 @@ namespace RemoteHotel.DAL
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Rental> CustomerRooms { get; set; }          
+        public DbSet<Rental> Rentals { get; set; }          
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,12 +30,12 @@ namespace RemoteHotel.DAL
 
             modelBuilder.Entity<Rental>()
                 .HasRequired(t => t.Customer)
-                .WithMany(t => t.CustomerRooms)
+                .WithMany(t => t.Rentals)
                 .HasForeignKey(t => t.CustomerId);
 
             modelBuilder.Entity<Rental>()
                 .HasRequired(t => t.Room)
-                .WithMany(t => t.CustomerRooms)
+                .WithMany(t => t.Rentals)
                 .HasForeignKey(t => t.RoomId);
 
             modelBuilder.Entity<Rental>()
@@ -51,6 +53,11 @@ namespace RemoteHotel.DAL
             modelBuilder.Entity<Room>()
                 .Property(t => t.Beds)
                 .IsRequired();
+
+            //ToDo add Forgiven key to status 
+            //modelBuilder.Entity<Room>()
+            //    .Property(t => t.Status)
+            //    
 
             modelBuilder.Entity<Room>()
                 .HasKey(x => x.Id);
@@ -82,7 +89,36 @@ namespace RemoteHotel.DAL
                 .Property(t => t.Password)
                 .IsRequired();
 
+
+
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RemoteHotel.Client.Services
 {
-    public class RentalService
+    public class Rentalservice
     {
     }
 }

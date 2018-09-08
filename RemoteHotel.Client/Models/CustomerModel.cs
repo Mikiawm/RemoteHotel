@@ -9,7 +9,7 @@ namespace RemoteHotel.Client.Models
     {
         public int CustomerId { get; set; }
 
-        public IList<RoomModel> CustomerRoom { get; set; }
+        public IList<RoomModel> Rentals { get; set; }
 
         public string CustomerName { get; set; }
 

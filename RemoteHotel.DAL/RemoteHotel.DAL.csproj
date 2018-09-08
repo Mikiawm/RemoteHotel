@@ -93,13 +93,9 @@
     <Compile Include="Methods\Repository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
     <Compile Include="Methods\UnitOfWork.cs" />
-    <Compile Include="Migrations\201809021945178_InitialModel.cs" />
-    <Compile Include="Migrations\201809021945178_InitialModel.Designer.cs">
-      <DependentUpon>201809021945178_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809031304441_ChangeCustomerRoomTableNameToRental.cs" />
-    <Compile Include="Migrations\201809031304441_ChangeCustomerRoomTableNameToRental.Designer.cs">
-      <DependentUpon>201809031304441_ChangeCustomerRoomTableNameToRental.cs</DependentUpon>
+    <Compile Include="Migrations\201809062102463_InitialModel.cs" />
+    <Compile Include="Migrations\201809062102463_InitialModel.Designer.cs">
+      <DependentUpon>201809062102463_InitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -123,11 +119,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809021945178_InitialModel.resx">
-      <DependentUpon>201809021945178_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809031304441_ChangeCustomerRoomTableNameToRental.resx">
-      <DependentUpon>201809031304441_ChangeCustomerRoomTableNameToRental.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809062102463_InitialModel.resx">
+      <DependentUpon>201809062102463_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

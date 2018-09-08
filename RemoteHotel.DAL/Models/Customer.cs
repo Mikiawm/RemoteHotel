@@ -5,7 +5,7 @@ namespace RemoteHotel.DAL.Models
 {
     public class Customer
     {
-        public int Id { get; set; }
+        public int CustomerId { get; set; }
 
         public string FirstName { get; set; }
 
@@ -19,6 +19,6 @@ namespace RemoteHotel.DAL.Models
 
         public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<Rental> CustomerRooms { get; set; }
+        public virtual ICollection<Rental> Rentals { get; set; }
     }
 }

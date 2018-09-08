@@ -19,7 +19,7 @@ namespace RemoteHotel.DAL.Models
 
         public int Beds { get; set; }
 
-        public virtual ICollection<Rental> CustomerRooms { get; set; }
+        public virtual ICollection<Rental> Rentals { get; set; }
 
         public virtual Hotel CurrentHotel{ get; set; }
 

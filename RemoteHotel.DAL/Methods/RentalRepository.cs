@@ -21,13 +21,13 @@ namespace RemoteHotel.DAL.Methods
         {
             var newRental = new Rental
             {
-                CustomerId = customer.Id,
+                CustomerId = customer.CustomerId,
                 Customer = customer,
                 RoomId = room.Id,
                 Room = room,
                 RoomKey = key,
                 CreateDateTime = DateTime.Now,
-                ExpiredDAteTime = expiredDateTime
+                ExpiredDateTime = expiredDateTime
             };
             Context.Set<Rental>().Add(newRental);
         }

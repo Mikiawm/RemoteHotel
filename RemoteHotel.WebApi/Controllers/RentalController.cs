@@ -35,12 +35,12 @@ namespace RemoteHotel.WebApi.Controllers
         [Route("rental/getAll")]
         public IHttpActionResult GetAllRental()
         {
-            IEnumerable<Rental> rentals;
+            IEnumerable<Rental> Rentals;
             using (var unitOfWork = new UnitOfWork(new RemoteHotelContext()))
             {
-                rentals = unitOfWork.Rentals.GetAll();
+                Rentals = unitOfWork.Rentals.GetAll();
             }
-            return Ok(rentals);
+            return Ok(Rentals);
         }
     }
 }
