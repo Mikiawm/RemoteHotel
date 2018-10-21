@@ -27,6 +27,7 @@ namespace RemoteHotel.WebApi.Controllers
                 string roomCode = RoomCodeService.GenerateRoomCode();
 
                 unitOfWork.Rentals.Add(customer, room, roomCode, expiredDateTime);
+                unitOfWork.Complete();
             }
             return Ok();
         }

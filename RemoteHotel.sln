@@ -9,7 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.Client", "Remot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.DAL", "RemoteHotel.DAL\RemoteHotel.DAL.csproj", "{5A84B115-3A7F-42E1-A355-7C678CBE70D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.Mobile.Android", "RemoteHotel.Mobile\RemoteHotel.Mobile.Android\RemoteHotel.Mobile.Android.csproj", "{6C1C790B-82E2-4B88-8F26-D251BAA028CC}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RemoteHotel.Mobile", "RemoteHotel.Mobile\RemoteHotel.Mobile\RemoteHotel.Mobile.shproj", "{E2BCBD31-7A6B-47F6-A531-E35B9638E147}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		RemoteHotel.Mobile\RemoteHotel.Mobile\RemoteHotel.Mobile.projitems*{6c1c790b-82e2-4b88-8f26-d251baa028cc}*SharedItemsImports = 4
+		RemoteHotel.Mobile\RemoteHotel.Mobile\RemoteHotel.Mobile.projitems*{e2bcbd31-7a6b-47f6-a531-e35b9638e147}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -27,6 +35,12 @@ Global
 		{5A84B115-3A7F-42E1-A355-7C678CBE70D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A84B115-3A7F-42E1-A355-7C678CBE70D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A84B115-3A7F-42E1-A355-7C678CBE70D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C1C790B-82E2-4B88-8F26-D251BAA028CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1C790B-82E2-4B88-8F26-D251BAA028CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1C790B-82E2-4B88-8F26-D251BAA028CC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6C1C790B-82E2-4B88-8F26-D251BAA028CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1C790B-82E2-4B88-8F26-D251BAA028CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C1C790B-82E2-4B88-8F26-D251BAA028CC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
