@@ -20,14 +20,15 @@ namespace RemoteHotel.DAL.Migrations
             try
             {
 
-                context.Users.AddOrUpdate(x => x.Id, new User()
-                {
-                    Id = 1,
-                    Login = "login1",
-                    Password = "test1",
-                    Status = 1,
-                    AccountType = 1
-                },
+                context.Users.AddOrUpdate(x => x.Id,
+                    new User()
+                    {
+                        Id = 1,
+                        Login = "login1",
+                        Password = "test1",
+                        Status = 1,
+                        AccountType = 1
+                    },
                     new User()
                     {
                         Id = 2,
@@ -35,14 +36,29 @@ namespace RemoteHotel.DAL.Migrations
                         Password = "test2",
                         Status = 1,
                         AccountType = 1
+                    },
+                    new User()
+                    {
+                        Id = 3,
+                        Login = "login3",
+                        Password = "test3",
+                        Status = 1,
+                        AccountType = 1
                     });
-                context.Hotels.AddOrUpdate(x => x.Id, new Hotel()
+                context.Hotels.AddOrUpdate(x => x.Id,
+                    new Hotel()
                 {
                     Id = 1,
                     HotelName = "HotelNowoczesny",
 
+                },
+                new Hotel(){
+                    Id = 2,
+                    HotelName = "HotelStary",
+
                 });
-                context.Rooms.AddOrUpdate(x => x.Id, new Room()
+                context.Rooms.AddOrUpdate(x => x.Id, 
+                    new Room()
                 {
                     Id = 1,
                     Status = 1,
@@ -92,6 +108,14 @@ namespace RemoteHotel.DAL.Migrations
                     Password = "qwerty1",
                     PhoneNumber = "664342546",
                     Rentals = rentals
+                });
+                context.AccessLogs.AddOrUpdate(x => x.LogId, new AccessLog()
+                {
+                    LogId = 1,
+                    CardId = "1234f5f",
+                    CreateDate = new DateTime(),
+                    Info = "", 
+                    Status = ""
                 });
                 context.SaveChanges();
             }

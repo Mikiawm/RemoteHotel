@@ -98,6 +98,7 @@
       <DependentUpon>201809062102463_InitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\Order.cs" />

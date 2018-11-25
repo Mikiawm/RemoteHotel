@@ -22,7 +22,9 @@ namespace RemoteHotel.DAL
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Rental> Rentals { get; set; }          
+        public DbSet<Rental> Rentals { get; set; }
+
+        public DbSet<AccessLog> AccessLogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -90,6 +92,8 @@ namespace RemoteHotel.DAL
                 .IsRequired();
 
 
+            modelBuilder.Entity<AccessLog>()
+                .HasKey(t => t.LogId);
 
             base.OnModelCreating(modelBuilder);
         }
