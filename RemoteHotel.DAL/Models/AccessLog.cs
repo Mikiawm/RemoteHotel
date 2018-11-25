@@ -13,8 +13,10 @@ namespace RemoteHotel.DAL.Models
 
         public string Info { get; set; }
 
-        public string Status { get; set; }
+        public bool Status { get; set; }
 
         public string CardId { get; set; }
+
+        public string PasswordHash { get; set; }
     }
 }

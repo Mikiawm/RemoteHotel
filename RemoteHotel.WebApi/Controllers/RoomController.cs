@@ -42,9 +42,48 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpGet]
         [Route("room/openRoom/{rentalCode}")]
-        public bool OpenRoom(string rentalCode)
+        public bool OpenRoom(string rentalCode, string cardId, string roomNumber)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var roomStatus = this._unitOfWork.Rooms.OpenRoom(rentalCode, roomNumber);
+
+                AccessLog accessLog = new AccessLog()
+                {
+                    CreateDate = DateTime.Now,
+                    CardId = cardId,
+                    Info = "",
+                    Status = roomStatus,
+                    PasswordHash = rentalCode
+                };
+                this._unitOfWork.AccessLogs.Add(accessLog);
+                
+
+                return roomStatus;
+            }
+            catch(Exception ex)
+            {
+                AccessLog accessLog = new AccessLog()
+                {
+                    CreateDate = DateTime.Now,
+                    CardId = cardId,
+                    Info = ex.Message,
+                    Status = false,
+                    PasswordHash = rentalCode
+                };
+                this._unitOfWork.AccessLogs.Add(accessLog);
+
+                var resp = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent(string.Format(ex.Message)),
+                    ReasonPhrase = ex.Message
+                };
+                throw new HttpResponseException(resp);
+            }
+            finally
+            {
+                this._unitOfWork.Complete();
+            }
 
         }
     }
