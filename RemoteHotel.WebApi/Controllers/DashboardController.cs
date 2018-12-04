@@ -36,11 +36,11 @@ namespace RemoteHotel.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("hotel/getAll")]
-        public IHttpActionResult GetAllHotels()
+        [Route("hotels")]
+        public IEnumerable<Hotel> GetAllHotels()
         {
             var hotels = this._unitOfWork.Hotels.GetAll();
-            return Ok(hotels);
+            return hotels;
         }
 
     }

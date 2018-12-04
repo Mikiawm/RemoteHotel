@@ -13,5 +13,6 @@ namespace RemoteHotel.DAL.Methods
         public AccessLogRepository(DbContext context) : base(context)
         {
         }
+
     }
 }

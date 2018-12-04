@@ -95,9 +95,9 @@
     <Compile Include="Methods\Repository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
     <Compile Include="Methods\UnitOfWork.cs" />
-    <Compile Include="Migrations\201809062102463_InitialModel.cs" />
-    <Compile Include="Migrations\201809062102463_InitialModel.Designer.cs">
-      <DependentUpon>201809062102463_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201812021957259_InitialCreate2.cs" />
+    <Compile Include="Migrations\201812021957259_InitialCreate2.Designer.cs">
+      <DependentUpon>201812021957259_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
@@ -122,8 +122,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809062102463_InitialModel.resx">
-      <DependentUpon>201809062102463_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812021957259_InitialCreate2.resx">
+      <DependentUpon>201812021957259_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

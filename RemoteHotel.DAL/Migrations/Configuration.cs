@@ -115,7 +115,7 @@ namespace RemoteHotel.DAL.Migrations
                     CardId = "1234f5f",
                     CreateDate = new DateTime(),
                     Info = "", 
-                    Status = "",
+                    Status = true,
                     PasswordHash = ""
                 });
                 context.SaveChanges();

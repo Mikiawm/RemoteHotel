@@ -21,8 +21,8 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
         [HttpGet]
-        [Route("room/{roomNumber}")]
-        public Room GetRoom(string roomNumber)
+        [Route("rooms/{roomNumber}")]
+        public Room Get(string roomNumber)
         {
             try
             {
@@ -41,7 +41,22 @@ namespace RemoteHotel.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("room/openRoom/{rentalCode}")]
+        [Route("rooms")]
+        public IEnumerable<Room> GetAll()
+        {
+            try
+            {
+                var rooms = this._unitOfWork.Rooms.GetAllRooms();
+                return rooms;
+            }
+            catch(Exception e)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+        }
+
+        [HttpGet]
+        [Route("rooms/openRoom/{rentalCode}")]
         public bool OpenRoom(string rentalCode, string cardId, string roomNumber)
         {
             try

@@ -3,10 +3,23 @@ namespace RemoteHotel.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialModel : DbMigration
+    public partial class InitialCreate2 : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.AccessLog",
+                c => new
+                    {
+                        LogId = c.Int(nullable: false, identity: true),
+                        CreateDate = c.DateTime(nullable: false),
+                        Info = c.String(),
+                        Status = c.Boolean(nullable: false),
+                        CardId = c.String(),
+                        PasswordHash = c.String(),
+                    })
+                .PrimaryKey(t => t.LogId);
+            
             CreateTable(
                 "dbo.Customer",
                 c => new
@@ -105,6 +118,7 @@ namespace RemoteHotel.DAL.Migrations
             DropTable("dbo.Room");
             DropTable("dbo.Rental");
             DropTable("dbo.Customer");
+            DropTable("dbo.AccessLog");
         }
     }
 }

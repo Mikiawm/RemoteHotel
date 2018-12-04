@@ -27,6 +27,11 @@ namespace RemoteHotel.DAL.Methods
             return _context.Rooms.Where(x => x.CurrentHotelId == hotelId);
         }
 
+        public IEnumerable<Room> GetAllRooms()
+        {
+            return _context.Rooms;
+        }
+
         public bool OpenRoom(string rentalCode, string roomNumber)
         {
             return _context.Rentals.Any(x => x.RoomKey == rentalCode && x.Room.RoomNumber == roomNumber);
