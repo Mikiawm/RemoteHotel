@@ -17,7 +17,7 @@ using Swagger.Net;
 
 namespace RemoteHotel.WebApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/account")]
     public class AccountController : ApiController
     {
         private readonly UnitOfWork _unitOfWork;
