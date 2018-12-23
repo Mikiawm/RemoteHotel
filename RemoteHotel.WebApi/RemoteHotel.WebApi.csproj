@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AccessLogController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\HotelController.cs" />
     <Compile Include="Controllers\RentalController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">

@@ -35,13 +35,7 @@ namespace RemoteHotel.WebApi.Controllers
             return Ok(dashboardData);
         }
 
-        [HttpGet]
-        [Route("hotels")]
-        public IEnumerable<Hotel> GetAllHotels()
-        {
-            var hotels = this._unitOfWork.Hotels.GetAll();
-            return hotels;
-        }
+
 
     }
 }
