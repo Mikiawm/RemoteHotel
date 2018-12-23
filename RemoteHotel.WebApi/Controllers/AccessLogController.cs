@@ -8,10 +8,12 @@ using System.Web.Http;
 using RemoteHotel.DAL;
 using RemoteHotel.DAL.Methods;
 using RemoteHotel.DAL.Models;
+using RemoteHotel.WebApi.Attributes;
 
 namespace RemoteHotel.WebApi.Controllers
 {
     [RoutePrefix("api")]
+    [TokenAuthenticate]
     public class AccessLogController : ApiController
     {
         private readonly UnitOfWork _unitOfWork;
