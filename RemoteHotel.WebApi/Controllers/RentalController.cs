@@ -36,7 +36,7 @@ namespace RemoteHotel.WebApi.Controllers
         [Route("rental/getAll")]
         public IHttpActionResult GetAllRental()
         {
-            IEnumerable<Rental> Rentals;
+            Object Rentals;
             using (var unitOfWork = new UnitOfWork(new RemoteHotelContext()))
             {
                 Rentals = unitOfWork.Rentals.GetAll();

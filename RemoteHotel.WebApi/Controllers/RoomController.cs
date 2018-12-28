@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Routing;
 using RemoteHotel.DAL;
 using RemoteHotel.DAL.Methods;
 using RemoteHotel.DAL.Models;
+using RemoteHotel.WebApi.Models;
 
 namespace RemoteHotel.WebApi.Controllers
 {
@@ -42,7 +44,7 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpGet]
         [Route("rooms")]
-        public IEnumerable<Room> GetAll()
+        public Object GetAll()
         {
             try
             {
@@ -99,6 +101,22 @@ namespace RemoteHotel.WebApi.Controllers
             {
                 this._unitOfWork.Complete();
             }
+
+        }
+        [HttpPost]
+        [Route("rooms")]
+        public IHttpActionResult AddHotel([FromBody]RoomViewModel room)
+        {
+            Room newRoom = new Room();
+
+            newRoom.CurrentHotelId = room.HotelId;
+            newRoom.Beds = room.Beds;
+            newRoom.Standard = room.Standard;
+            this._unitOfWork.Rooms.Add(newRoom);
+
+            this._unitOfWork.Complete();
+
+            return Ok(newRoom.Id);
 
         }
     }

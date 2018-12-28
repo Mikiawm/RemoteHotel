@@ -22,7 +22,7 @@ namespace RemoteHotel.DAL.Methods
             return _context.Rooms.FirstOrDefault(x => x.RoomNumber == roomNumber);
         }
 
-        public IEnumerable<Room> GetRoomsByHotelId(int hotelId)
+        public Object GetRoomsByHotelId(int hotelId)
         {
             return _context.Rooms.Where(x => x.CurrentHotelId == hotelId);
         }

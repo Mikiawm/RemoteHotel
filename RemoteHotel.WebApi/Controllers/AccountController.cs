@@ -52,7 +52,7 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpGet]
         [Route("user/{login}")]
-        public IEnumerable<User> GetUsers(string login)
+        public Object GetUsers(string login)
         {
             try
             {
