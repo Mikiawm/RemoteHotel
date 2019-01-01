@@ -23,18 +23,48 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
 
-
-
- 
-
         [HttpGet]
         [Route("hotels")]
         public IHttpActionResult GetAllHotels()
         {
+            var hotels = this._unitOfWork.Hotels.GetAll().Select(x =>
+            new HotelViewModel
+            {
+                HotelId = x.Id,
+                HotelName = x.HotelName,
+                Floors = x.Floors.Select(z =>
+                    new FloorViewModel
+                    {
+                        FloorId = z.Id,
+                        Level = z.Level,
+                        Rooms = z.Rooms.Select(y =>
+                            new RoomViewModel
+                            {
+                                RoomNumber = y.RoomNumber,
+                                Beds = y.Beds,
+                                Standard = y.Standard
+                            })
+                    })
+            });
+            return Ok(hotels);
+        }
 
-            //var hotels = this._unitOfWork.Hotels.GetAll().Select(x => new HotelViewModel { HotelId = x.Id, HotelName = x.HotelName, Rooms = x.Rooms.Select(y => new RoomViewModel { RoomNumber = y.RoomNumber, Beds = y.Beds, Standard = y.Standard }) });
-            //return Ok(hotels);
-            return Ok(true);
+        public IHttpActionResult GetFloorsByHotel(int hotelId)
+        {
+            var hotelData = this._unitOfWork.Floors.GetFloorsByHotel(hotelId);
+            return Ok(hotelData);
+        }
+
+        public IHttpActionResult AddFloorToHotel([FromBody]FloorViewModel floor)
+        {
+            Floor newFloor = new Floor();
+            newFloor.Level = floor.Level;
+            newFloor.HotelId = floor.HotelId;
+
+            this._unitOfWork.Floors.Add(newFloor);
+
+
+            return Ok(this._unitOfWork.Complete());
         }
 
         [HttpPost]

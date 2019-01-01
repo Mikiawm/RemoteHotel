@@ -6,8 +6,8 @@ using RemoteHotel.DAL.Models;
 
 namespace RemoteHotel.DAL.Interfaces
 {
-    public interface ICustomerRepository : IRepository<Customer>
+    public interface IFloorRepository : IRepository<Floor>
     {
-        IEnumerable<Customer> GetCustomersByHotelId(int hotelId);
+        IEnumerable<Floor> GetFloorsByHotel(int hotelId);
     }
 }

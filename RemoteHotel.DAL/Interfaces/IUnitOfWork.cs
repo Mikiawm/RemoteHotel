@@ -11,6 +11,8 @@ namespace RemoteHotel.DAL.Interfaces
         IAccountRepository Accounts { get; }
         ICustomerRepository Customers { get; }
         IHotelRepository Hotels { get; }
+        IAccessLogRepository AccessLogs { get; }
+        IFloorRepository Floors { get; }
         int Complete();
     }
 }

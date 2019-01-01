@@ -81,6 +81,7 @@
     <Compile Include="Interfaces\IAccessLogRepository.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\IFloorRepository.cs" />
     <Compile Include="Interfaces\IHotelRepository.cs" />
     <Compile Include="Interfaces\IRentalRepository.cs" />
     <Compile Include="Interfaces\IQueryResources.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Methods\AccessLogRepository.cs" />
     <Compile Include="Methods\AccountRepository.cs" />
     <Compile Include="Methods\CustomerRepository.cs" />
+    <Compile Include="Methods\FloorRepository.cs" />
     <Compile Include="Methods\HotelRepository.cs" />
     <Compile Include="Methods\RentalRepository.cs" />
     <Compile Include="Methods\Repository.cs" />

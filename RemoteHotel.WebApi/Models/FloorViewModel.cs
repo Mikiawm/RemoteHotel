@@ -5,11 +5,11 @@ using System.Web;
 
 namespace RemoteHotel.WebApi.Models
 {
-    public class HotelViewModel
+    public class FloorViewModel
     {
+        public int FloorId { get; set; }
         public int HotelId { get; set; }
-        public string HotelName { get; set; }
+        public int Level { get; set; }
         public IEnumerable<RoomViewModel> Rooms { get; set; }
-        public object Floors { get; set; }
     }
 }

@@ -105,11 +105,11 @@ namespace RemoteHotel.WebApi.Controllers
         }
         [HttpPost]
         [Route("rooms")]
-        public IHttpActionResult AddHotel([FromBody]RoomViewModel room)
+        public IHttpActionResult AddRoom([FromBody]RoomViewModel room)
         {
             Room newRoom = new Room();
 
-            newRoom.Floor.HotelId= room.HotelId;
+            newRoom.FloorId = room.FloorId;
             newRoom.RoomNumber = room.RoomNumber;
             newRoom.Beds = room.Beds;
             newRoom.Standard = room.Standard;
