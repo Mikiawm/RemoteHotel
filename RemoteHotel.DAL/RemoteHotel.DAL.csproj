@@ -95,13 +95,14 @@
     <Compile Include="Methods\Repository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
     <Compile Include="Methods\UnitOfWork.cs" />
-    <Compile Include="Migrations\201812021957259_InitialCreate2.cs" />
-    <Compile Include="Migrations\201812021957259_InitialCreate2.Designer.cs">
-      <DependentUpon>201812021957259_InitialCreate2.cs</DependentUpon>
+    <Compile Include="Migrations\201812311647300_initial.cs" />
+    <Compile Include="Migrations\201812311647300_initial.Designer.cs">
+      <DependentUpon>201812311647300_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Floor.cs" />
     <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Room.cs" />
@@ -122,8 +123,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812021957259_InitialCreate2.resx">
-      <DependentUpon>201812021957259_InitialCreate2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812311647300_initial.resx">
+      <DependentUpon>201812311647300_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -17,10 +17,14 @@ namespace RemoteHotel.DAL.Migrations
 
         protected override void Seed(RemoteHotelContext context)
         {
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //{
+            //    System.Diagnostics.Debugger.Launch();
+            //}
             try
             {
-
-                context.Users.AddOrUpdate(x => x.Id,
+                var users = new List<User>
+                {
                     new User()
                     {
                         Id = 1,
@@ -44,37 +48,71 @@ namespace RemoteHotel.DAL.Migrations
                         Password = "test3",
                         Status = 1,
                         AccountType = 1
-                    });
-                context.Hotels.AddOrUpdate(x => x.Id,
-                    new Hotel()
-                {
-                    Id = 1,
-                    HotelName = "HotelNowoczesny",
-
-                },
-                new Hotel(){
-                    Id = 2,
-                    HotelName = "HotelStary",
-
-                });
-                context.Rooms.AddOrUpdate(x => x.Id, 
+                    }
+                };
+                var rooms = new List<Room>{
                     new Room()
+                    {
+                        Id = 1,
+                        Status = 1,
+                        Beds = 2,
+                        RoomNumber = "123",
+                        Standard = 1,
+                        FloorId = 1
+                    }, new Room()
+                    {
+                        Id = 2,
+                        Status = 2,
+                        Beds = 2,
+                        RoomNumber = "223",
+                        Standard = 1,
+                        FloorId = 1
+                    }
+                };
+                var floors = new List<Floor>()
                 {
-                    Id = 1,
-                    Status = 1,
-                    Beds = 2,
-                    RoomNumber = "123",
-                    Standard = 1,
-                    CurrentHotelId = 1
-                }, new Room()
+                    new Floor()
+                    {
+                        Id = 1,
+                        Level = 0,
+                        Rooms = rooms
+                    },
+                    new Floor()
+                    {
+                        Id = 2,
+                        Level = 1,
+                        Rooms = null
+                    },
+                    new Floor()
+                    {
+                        Id = 3,
+                        Level = 2,
+                        Rooms = null
+                    },
+                    new Floor()
+                    {
+                        Id = 4,
+                        Level = 4,
+                        Rooms = null
+                    }
+                };
+                var hotels = new List<Hotel>()
                 {
-                    Id = 2,
-                    Status = 2,
-                    Beds = 2,
-                    RoomNumber = "223",
-                    Standard = 1,
-                    CurrentHotelId = 1
-                });
+                    new Hotel()
+                    {
+                        Id = 1,
+                        HotelName = "HotelNowoczesny",
+                        Floors = floors
+                       
+                    },
+                    new Hotel()
+                    {
+                        Id = 2,
+                        HotelName = "HotelStary",
+                        Floors = null
+                       
+                    }
+                };
                 var rentals = new List<Rental>()
                 {
                     new Rental()
@@ -95,29 +133,41 @@ namespace RemoteHotel.DAL.Migrations
                         CreateDateTime = DateTime.Now,
                         ExpiredDateTime = DateTime.Now
                     }
-
                 };
+                var customers = new List<Customer>()
+                {
+                    new Customer()
+                    {
+                        CustomerId = 1,
+                        CreatedDate = DateTime.Now,
+                        Email = "customer1@gmail.com",
+                        FirstName = "Customer",
+                        LastName = "Separation",
+                        Password = "qwerty1",
+                        PhoneNumber = "664342546",
+                        Rentals = rentals
+                    }
+                };
+                var accessLogs = new List<AccessLog>()
+                {
+                    new AccessLog()
+                    {
+                        LogId = 1,
+                        CardId = "1234f5f",
+                        CreateDate = DateTime.Now,
+                        Info = "",
+                        Status = true,
+                        PasswordHash = ""
+                    }
+                };
+                context.Floors.AddOrUpdate(x => x.Id, floors[0], floors[1], floors[2], floors[3]);
+                context.AccessLogs.AddOrUpdate(x => x.LogId, accessLogs[0]);
+                context.Users.AddOrUpdate(x => x.Id, users[0]);
+                context.Rooms.AddOrUpdate(x => x.Id, rooms[0], rooms[1]);
+                context.Hotels.AddOrUpdate(x => x.Id, hotels[0], hotels[1]);
                 context.Rentals.AddOrUpdate(x => x.RentalId, rentals[0], rentals[1]);
-                context.Customers.AddOrUpdate(x => x.CustomerId, new Customer()
-                {
-                    CustomerId = 1,
-                    CreatedDate = DateTime.Now,
-                    Email = "customer1@gmail.com",
-                    FirstName = "Customer",
-                    LastName = "Separation",
-                    Password = "qwerty1",
-                    PhoneNumber = "664342546",
-                    Rentals = rentals
-                });
-                context.AccessLogs.AddOrUpdate(x => x.LogId, new AccessLog()
-                {
-                    LogId = 1,
-                    CardId = "1234f5f",
-                    CreateDate = new DateTime(),
-                    Info = "", 
-                    Status = true,
-                    PasswordHash = ""
-                });
+                context.Customers.AddOrUpdate(x => x.CustomerId, customers[0]);
+
                 context.SaveChanges();
             }
 

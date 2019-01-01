@@ -109,7 +109,8 @@ namespace RemoteHotel.WebApi.Controllers
         {
             Room newRoom = new Room();
 
-            newRoom.CurrentHotelId = room.HotelId;
+            newRoom.Floor.HotelId= room.HotelId;
+            newRoom.RoomNumber = room.RoomNumber;
             newRoom.Beds = room.Beds;
             newRoom.Standard = room.Standard;
             this._unitOfWork.Rooms.Add(newRoom);

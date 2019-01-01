@@ -26,27 +26,82 @@ namespace RemoteHotel.DAL
 
         public DbSet<AccessLog> AccessLogs { get; set; }
 
+        public DbSet<Floor> Floors { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            modelBuilder.Entity<Rental>()
-                .HasRequired(t => t.Customer)
-                .WithMany(t => t.Rentals)
-                .HasForeignKey(t => t.CustomerId);
+            BuildRental(modelBuilder);
+            BuildRoom(modelBuilder);
+            BuildHotel(modelBuilder);
+            BuildUser(modelBuilder);
+            BuildAccessLog(modelBuilder);
+            BuildFloor(modelBuilder);
 
-            modelBuilder.Entity<Rental>()
-                .HasRequired(t => t.Room)
-                .WithMany(t => t.Rentals)
-                .HasForeignKey(t => t.RoomId);
+            base.OnModelCreating(modelBuilder);
+        }
 
-            modelBuilder.Entity<Rental>()
-                .Property(t => t.RoomKey)
+        private static void BuildFloor(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Floor>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<Floor>()
+                .HasMany<Room>(t => t.Rooms)
+                .WithRequired(t => t.Floor)
+                .HasForeignKey<int>(t => t.FloorId);
+        }
+
+        private static void BuildAccessLog(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AccessLog>()
+                .HasKey(t => t.LogId);
+        }
+
+        private static void BuildUser(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<User>()
+                .Property(t => t.AccountType)
                 .IsRequired();
 
+            modelBuilder.Entity<User>()
+                .Property(t => t.Login)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(t => t.Password)
+                .IsRequired();
+        }
+
+        private static void BuildHotel(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Hotel>()
+            //    .HasMany<Room>(t => t.Rooms)
+            //    .WithRequired(t => t.Hotel)
+            //    .HasForeignKey<int>(t => t.HotelId);
+
+            modelBuilder.Entity<Hotel>()
+                .HasMany<Floor>(t => t.Floors)
+                .WithRequired(t => t.Hotel)
+                .HasForeignKey<int>(t => t.HotelId);
+
+            modelBuilder.Entity<Hotel>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<Hotel>()
+                .Property(t => t.HotelName)
+                .IsRequired();
+        }
+
+        private static void BuildRoom(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Room>()
-                .Property(t => t.RoomNumber)
-                .IsRequired();
+                            .Property(t => t.RoomNumber)
+                            .IsRequired();
 
             modelBuilder.Entity<Room>()
                 .Property(t => t.Status)
@@ -63,39 +118,23 @@ namespace RemoteHotel.DAL
 
             modelBuilder.Entity<Room>()
                 .HasKey(x => x.Id);
+        }
 
-            modelBuilder.Entity<Hotel>()
-                .HasMany<Room>(t => t.Rooms)
-                .WithRequired(t => t.CurrentHotel)
-                .HasForeignKey<int>(t => t.CurrentHotelId);
+        private static void BuildRental(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Rental>()
+                .HasRequired(t => t.Customer)
+                .WithMany(t => t.Rentals)
+                .HasForeignKey(t => t.CustomerId);
 
-            modelBuilder.Entity<Hotel>()
-                .HasKey(t => t.Id);
+            modelBuilder.Entity<Rental>()
+                .HasRequired(t => t.Room)
+                .WithMany(t => t.Rentals)
+                .HasForeignKey(t => t.RoomId);
 
-            modelBuilder.Entity<Hotel>()
-                .Property(t => t.HotelName)
+            modelBuilder.Entity<Rental>()
+                .Property(t => t.RoomKey)
                 .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .HasKey(t => t.Id);
-
-            modelBuilder.Entity<User>()
-                .Property(t => t.AccountType)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .Property(t => t.Login)
-                .IsRequired();
-
-            modelBuilder.Entity<User>()
-                .Property(t => t.Password)
-                .IsRequired();
-
-
-            modelBuilder.Entity<AccessLog>()
-                .HasKey(t => t.LogId);
-
-            base.OnModelCreating(modelBuilder);
         }
 
         public override int SaveChanges()

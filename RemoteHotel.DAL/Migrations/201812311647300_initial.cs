@@ -3,7 +3,7 @@ namespace RemoteHotel.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate2 : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -60,11 +60,23 @@ namespace RemoteHotel.DAL.Migrations
                         Status = c.Int(nullable: false),
                         Standard = c.Int(nullable: false),
                         Beds = c.Int(nullable: false),
-                        CurrentHotelId = c.Int(nullable: false),
+                        FloorId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Hotel", t => t.CurrentHotelId, cascadeDelete: true)
-                .Index(t => t.CurrentHotelId);
+                .ForeignKey("dbo.Floor", t => t.FloorId, cascadeDelete: true)
+                .Index(t => t.FloorId);
+            
+            CreateTable(
+                "dbo.Floor",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        HotelId = c.Int(nullable: false),
+                        Level = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Hotel", t => t.HotelId, cascadeDelete: true)
+                .Index(t => t.HotelId);
             
             CreateTable(
                 "dbo.Hotel",
@@ -107,14 +119,17 @@ namespace RemoteHotel.DAL.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Rental", "RoomId", "dbo.Room");
-            DropForeignKey("dbo.Room", "CurrentHotelId", "dbo.Hotel");
+            DropForeignKey("dbo.Room", "FloorId", "dbo.Floor");
+            DropForeignKey("dbo.Floor", "HotelId", "dbo.Hotel");
             DropForeignKey("dbo.Rental", "CustomerId", "dbo.Customer");
-            DropIndex("dbo.Room", new[] { "CurrentHotelId" });
+            DropIndex("dbo.Floor", new[] { "HotelId" });
+            DropIndex("dbo.Room", new[] { "FloorId" });
             DropIndex("dbo.Rental", new[] { "RoomId" });
             DropIndex("dbo.Rental", new[] { "CustomerId" });
             DropTable("dbo.User");
             DropTable("dbo.Order");
             DropTable("dbo.Hotel");
+            DropTable("dbo.Floor");
             DropTable("dbo.Room");
             DropTable("dbo.Rental");
             DropTable("dbo.Customer");

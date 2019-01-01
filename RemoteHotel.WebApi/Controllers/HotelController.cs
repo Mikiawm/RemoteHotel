@@ -32,8 +32,9 @@ namespace RemoteHotel.WebApi.Controllers
         public IHttpActionResult GetAllHotels()
         {
 
-            var hotels = this._unitOfWork.Hotels.GetAll().Select(x => new HotelViewModel { HotelId = x.Id, HotelName = x.HotelName, Rooms = x.Rooms.Select(y => new RoomViewModel { RoomNumber = y.RoomNumber, Beds = y.Beds, Standard = y.Standard }) });
-            return Ok(hotels);
+            //var hotels = this._unitOfWork.Hotels.GetAll().Select(x => new HotelViewModel { HotelId = x.Id, HotelName = x.HotelName, Rooms = x.Rooms.Select(y => new RoomViewModel { RoomNumber = y.RoomNumber, Beds = y.Beds, Standard = y.Standard }) });
+            //return Ok(hotels);
+            return Ok(true);
         }
 
         [HttpPost]

@@ -24,7 +24,7 @@ namespace RemoteHotel.DAL.Methods
 
         public Object GetRoomsByHotelId(int hotelId)
         {
-            return _context.Rooms.Where(x => x.CurrentHotelId == hotelId);
+            return _context.Rooms.Where(x => x.Floor.HotelId == hotelId);
         }
 
         public IEnumerable<Room> GetAllRooms()
