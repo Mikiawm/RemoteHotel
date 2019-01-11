@@ -16,17 +16,14 @@ namespace RemoteHotel.DAL
 
         public DbSet<Room> Rooms { get; set; }
 
-        public DbSet<Order> Orders { get; set; }
-
         public DbSet<Customer> Customers { get; set; }
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<Reservation> Rentals { get; set; }
 
         public DbSet<AccessLog> AccessLogs { get; set; }
 
-        public DbSet<Floor> Floors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,26 +34,14 @@ namespace RemoteHotel.DAL
             BuildHotel(modelBuilder);
             BuildUser(modelBuilder);
             BuildAccessLog(modelBuilder);
-            BuildFloor(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
-        }
-
-        private static void BuildFloor(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Floor>()
-                .HasKey(t => t.Id);
-
-            modelBuilder.Entity<Floor>()
-                .HasMany<Room>(t => t.Rooms)
-                .WithRequired(t => t.Floor)
-                .HasForeignKey<int>(t => t.FloorId);
         }
 
         private static void BuildAccessLog(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AccessLog>()
-                .HasKey(t => t.LogId);
+                .HasKey(t => t.Id);
         }
 
         private static void BuildUser(DbModelBuilder modelBuilder)
@@ -79,13 +64,8 @@ namespace RemoteHotel.DAL
 
         private static void BuildHotel(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Hotel>()
-            //    .HasMany<Room>(t => t.Rooms)
-            //    .WithRequired(t => t.Hotel)
-            //    .HasForeignKey<int>(t => t.HotelId);
-
             modelBuilder.Entity<Hotel>()
-                .HasMany<Floor>(t => t.Floors)
+                .HasMany<Room>(t => t.Rooms)
                 .WithRequired(t => t.Hotel)
                 .HasForeignKey<int>(t => t.HotelId);
 
@@ -100,21 +80,12 @@ namespace RemoteHotel.DAL
         private static void BuildRoom(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Room>()
-                            .Property(t => t.RoomNumber)
-                            .IsRequired();
-
-            modelBuilder.Entity<Room>()
-                .Property(t => t.Status)
+                .Property(t => t.RoomNumber)
                 .IsRequired();
 
             modelBuilder.Entity<Room>()
                 .Property(t => t.Beds)
-                .IsRequired();
-
-            //ToDo add Forgiven key to status 
-            //modelBuilder.Entity<Room>()
-            //    .Property(t => t.Status)
-            //    
+                .IsRequired(); 
 
             modelBuilder.Entity<Room>()
                 .HasKey(x => x.Id);
@@ -122,18 +93,21 @@ namespace RemoteHotel.DAL
 
         private static void BuildRental(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Rental>()
+            modelBuilder.Entity<Reservation>()
+                .HasKey(t => t.Id);
+
+            modelBuilder.Entity<Reservation>()
                 .HasRequired(t => t.Customer)
-                .WithMany(t => t.Rentals)
+                .WithMany(t => t.Reservations)
                 .HasForeignKey(t => t.CustomerId);
 
-            modelBuilder.Entity<Rental>()
+            modelBuilder.Entity<Reservation>()
                 .HasRequired(t => t.Room)
-                .WithMany(t => t.Rentals)
+                .WithMany(t => t.Reservations)
                 .HasForeignKey(t => t.RoomId);
 
-            modelBuilder.Entity<Rental>()
-                .Property(t => t.RoomKey)
+            modelBuilder.Entity<Reservation>()
+                .Property(t => t.ReservationKey)
                 .IsRequired();
         }
 

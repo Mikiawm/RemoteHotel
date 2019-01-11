@@ -13,7 +13,7 @@ namespace RemoteHotel.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201812311647300_initial"; }
+            get { return "201901092233195_initial"; }
         }
         
         string IMigrationMetadata.Source

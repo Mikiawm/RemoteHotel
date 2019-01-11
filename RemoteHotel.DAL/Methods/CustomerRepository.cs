@@ -23,7 +23,7 @@ namespace RemoteHotel.DAL.Methods
 
         public IEnumerable<Customer> GetCustomersByHotelId(int hotelId)
         {
-            return _context.Customers.Where(x => x.Rentals.Any(z => z.Room.Floor.HotelId == hotelId));
+            return _context.Customers.Where(x => x.Reservations.Any(z => z.Room.HotelId == hotelId));
         }
     }
 }

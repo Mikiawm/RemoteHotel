@@ -23,13 +23,22 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
         [HttpGet]
-        [Route("rooms/{roomNumber}")]
-        public Room Get(string roomNumber)
+        [Route("rooms/{roomId}")]
+        public IHttpActionResult Get(int roomId)
         {
             try
             {
-                Room room = this._unitOfWork.Rooms.Get(roomNumber);
-                return room;
+                Room room = this._unitOfWork.Rooms.Get(roomId);
+
+                var roomViewModel = new RoomViewModel()
+                {
+                    RoomNumber = room.RoomNumber,
+                    SingleBeds = room.SingleBeds,
+                    DoubleBeds = room.DoubleBeds,
+                    Beds = room.Beds,
+                    RoomType = room.RoomType
+                };
+                return Ok(roomViewModel);
             }
             catch (Exception ex)
             {
@@ -44,12 +53,19 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpGet]
         [Route("rooms")]
-        public Object GetAll()
+        public IHttpActionResult GetAll()
         {
             try
             {
-                var rooms = this._unitOfWork.Rooms.GetAllRooms();
-                return rooms;
+                var rooms = this._unitOfWork.Rooms.GetAllRooms().Select(x => new RoomViewModel()
+                {
+                    RoomNumber = x.RoomNumber,
+                    SingleBeds = x.SingleBeds,
+                    DoubleBeds = x.DoubleBeds,
+                    Beds = x.Beds,
+                    Description = x.Description
+                });
+                return Ok(rooms);
             }
             catch(Exception e)
             {
@@ -59,7 +75,7 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpGet]
         [Route("rooms/openRoom/{rentalCode}")]
-        public bool OpenRoom(string rentalCode, string cardId, string roomNumber)
+        public IHttpActionResult OpenRoom(string rentalCode, string cardId, string roomNumber)
         {
             try
             {
@@ -75,8 +91,7 @@ namespace RemoteHotel.WebApi.Controllers
                 };
                 this._unitOfWork.AccessLogs.Add(accessLog);
                 
-
-                return roomStatus;
+                return Ok(roomStatus);
             }
             catch(Exception ex)
             {
@@ -109,7 +124,7 @@ namespace RemoteHotel.WebApi.Controllers
         {
             Room newRoom = new Room();
 
-            newRoom.FloorId = room.FloorId;
+            newRoom.HotelId = room.HotelId;
             newRoom.RoomNumber = room.RoomNumber;
             newRoom.Beds = room.Beds;
             newRoom.Standard = room.Standard;

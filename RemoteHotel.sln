@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.WebApi", "RemoteHotel.WebApi\RemoteHotel.WebApi.csproj", "{D547CA58-D065-450C-BF51-C79A237BD259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.Client", "RemoteHotel.Client\RemoteHotel.Client.csproj", "{1C0E96DF-B4F6-4139-AB79-5B1906C71CA8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.DAL", "RemoteHotel.DAL\RemoteHotel.DAL.csproj", "{5A84B115-3A7F-42E1-A355-7C678CBE70D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteHotel.Mobile.Android", "RemoteHotel.Mobile\RemoteHotel.Mobile.Android\RemoteHotel.Mobile.Android.csproj", "{6C1C790B-82E2-4B88-8F26-D251BAA028CC}"
@@ -27,10 +25,6 @@ Global
 		{D547CA58-D065-450C-BF51-C79A237BD259}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D547CA58-D065-450C-BF51-C79A237BD259}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D547CA58-D065-450C-BF51-C79A237BD259}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C0E96DF-B4F6-4139-AB79-5B1906C71CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C0E96DF-B4F6-4139-AB79-5B1906C71CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C0E96DF-B4F6-4139-AB79-5B1906C71CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C0E96DF-B4F6-4139-AB79-5B1906C71CA8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A84B115-3A7F-42E1-A355-7C678CBE70D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A84B115-3A7F-42E1-A355-7C678CBE70D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A84B115-3A7F-42E1-A355-7C678CBE70D3}.Release|Any CPU.ActiveCfg = Release|Any CPU

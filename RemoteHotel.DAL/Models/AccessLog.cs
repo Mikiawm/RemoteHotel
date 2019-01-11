@@ -7,7 +7,7 @@ namespace RemoteHotel.DAL.Models
 {
     public class AccessLog
     {
-        public int LogId { get; set; }
+        public int Id { get; set; }
 
         public DateTime CreateDate { get; set; }
 

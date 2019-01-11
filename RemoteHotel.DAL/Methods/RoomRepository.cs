@@ -24,7 +24,7 @@ namespace RemoteHotel.DAL.Methods
 
         public Object GetRoomsByHotelId(int hotelId)
         {
-            return _context.Rooms.Where(x => x.Floor.HotelId == hotelId);
+            return _context.Rooms.Where(x => x.HotelId == hotelId);
         }
 
         public IEnumerable<Room> GetAllRooms()
@@ -34,12 +34,12 @@ namespace RemoteHotel.DAL.Methods
 
         public bool OpenRoom(string rentalCode, string roomNumber)
         {
-            return _context.Rentals.Any(x => x.RoomKey == rentalCode && x.Room.RoomNumber == roomNumber);
+            return _context.Rentals.Any(x => x.ReservationKey == rentalCode && x.Room.RoomNumber == roomNumber);
         }
 
         public bool CloseRoom(string rentalCode, string roomNumber)
         {
-            return _context.Rentals.Any(x => x.RoomKey == rentalCode && x.Room.RoomNumber == roomNumber);
+            return _context.Rentals.Any(x => x.ReservationKey == rentalCode && x.Room.RoomNumber == roomNumber);
         }
     }
 }

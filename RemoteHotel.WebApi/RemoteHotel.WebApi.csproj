@@ -122,15 +122,18 @@
     <Compile Include="Attributes\TokenAuthenticate.cs" />
     <Compile Include="Controllers\AccessLogController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
-    <Compile Include="Controllers\RentalController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\FloorViewModel.cs" />
+    <Compile Include="Models\AccessLogViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\HotelViewModelcs.cs" />
+    <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Models\RoomViewModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

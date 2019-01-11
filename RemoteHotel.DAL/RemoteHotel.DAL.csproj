@@ -81,9 +81,8 @@
     <Compile Include="Interfaces\IAccessLogRepository.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
-    <Compile Include="Interfaces\IFloorRepository.cs" />
     <Compile Include="Interfaces\IHotelRepository.cs" />
-    <Compile Include="Interfaces\IRentalRepository.cs" />
+    <Compile Include="Interfaces\IReservationRepository.cs" />
     <Compile Include="Interfaces\IQueryResources.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IRoomRepository.cs" />
@@ -91,26 +90,23 @@
     <Compile Include="Methods\AccessLogRepository.cs" />
     <Compile Include="Methods\AccountRepository.cs" />
     <Compile Include="Methods\CustomerRepository.cs" />
-    <Compile Include="Methods\FloorRepository.cs" />
     <Compile Include="Methods\HotelRepository.cs" />
-    <Compile Include="Methods\RentalRepository.cs" />
+    <Compile Include="Methods\ReservationRepository.cs" />
     <Compile Include="Methods\Repository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
     <Compile Include="Methods\UnitOfWork.cs" />
-    <Compile Include="Migrations\201812311647300_initial.cs" />
-    <Compile Include="Migrations\201812311647300_initial.Designer.cs">
-      <DependentUpon>201812311647300_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201901092233195_initial.cs" />
+    <Compile Include="Migrations\201901092233195_initial.Designer.cs">
+      <DependentUpon>201901092233195_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Floor.cs" />
     <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\RoomStatus.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\Rental.cs" />
+    <Compile Include="Models\Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteHotelConfiguration.cs" />
     <Compile Include="RemoteHotelContext.cs" />
@@ -125,8 +121,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812311647300_initial.resx">
-      <DependentUpon>201812311647300_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901092233195_initial.resx">
+      <DependentUpon>201901092233195_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

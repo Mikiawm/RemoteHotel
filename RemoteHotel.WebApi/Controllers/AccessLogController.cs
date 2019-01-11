@@ -43,7 +43,7 @@ namespace RemoteHotel.WebApi.Controllers
                 {
                     var accessLog = new AccessLogViewModel
                     {
-                        LogId = x.LogId,
+                        LogId = x.Id,
                         CreateDate = x.CreateDate,
                         PasswordHash = x.PasswordHash,
                         Info = x.Info,

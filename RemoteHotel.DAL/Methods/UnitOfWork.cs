@@ -16,18 +16,16 @@ namespace RemoteHotel.DAL.Methods
             Accounts = new AccountRepository(_context);
             Customers = new CustomerRepository(_context);
             Rooms = new RoomRepository(_context);
-            Rentals = new RentalRepository(_context);
+            Reservations = new ReservationRepository(_context);
             Hotels = new HotelRepository(_context);
             AccessLogs = new AccessLogRepository(_context);
-            Floors = new FloorRepository(_context);
         }
         public IRoomRepository Rooms { get; private set; }
         public IAccountRepository Accounts { get; private set; }
         public ICustomerRepository Customers { get; private set; }
         public IHotelRepository Hotels { get; }
-        public IRentalRepository Rentals { get; private set; }
+        public IReservationRepository Reservations { get; private set; }
         public IAccessLogRepository AccessLogs { get; private set; }
-        public IFloorRepository Floors { get; }
 
         public int Complete()
         {

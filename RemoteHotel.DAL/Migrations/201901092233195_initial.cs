@@ -11,20 +11,20 @@ namespace RemoteHotel.DAL.Migrations
                 "dbo.AccessLog",
                 c => new
                     {
-                        LogId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         CreateDate = c.DateTime(nullable: false),
                         Info = c.String(),
                         Status = c.Boolean(nullable: false),
                         CardId = c.String(),
                         PasswordHash = c.String(),
                     })
-                .PrimaryKey(t => t.LogId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Customer",
                 c => new
                     {
-                        CustomerId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         FirstName = c.String(),
                         LastName = c.String(),
                         Password = c.String(),
@@ -32,20 +32,22 @@ namespace RemoteHotel.DAL.Migrations
                         PhoneNumber = c.String(),
                         CreatedDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.CustomerId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Rental",
+                "dbo.Reservation",
                 c => new
                     {
-                        RentalId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         CustomerId = c.Int(nullable: false),
                         RoomId = c.Int(nullable: false),
-                        RoomKey = c.String(nullable: false),
+                        ReservationKey = c.String(nullable: false),
                         CreateDateTime = c.DateTime(nullable: false),
-                        ExpiredDateTime = c.DateTime(nullable: false),
+                        CheckInDate = c.DateTime(nullable: false),
+                        CheckOutDate = c.DateTime(nullable: false),
+                        Comment = c.String(),
                     })
-                .PrimaryKey(t => t.RentalId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Customer", t => t.CustomerId, cascadeDelete: true)
                 .ForeignKey("dbo.Room", t => t.RoomId, cascadeDelete: true)
                 .Index(t => t.CustomerId)
@@ -57,22 +59,13 @@ namespace RemoteHotel.DAL.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         RoomNumber = c.String(nullable: false),
-                        Status = c.Int(nullable: false),
                         Standard = c.Int(nullable: false),
                         Beds = c.Int(nullable: false),
-                        FloorId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Floor", t => t.FloorId, cascadeDelete: true)
-                .Index(t => t.FloorId);
-            
-            CreateTable(
-                "dbo.Floor",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
+                        Description = c.String(),
+                        RoomType = c.String(),
                         HotelId = c.Int(nullable: false),
-                        Level = c.Int(nullable: false),
+                        SingleBeds = c.Int(nullable: false),
+                        DoubleBeds = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Hotel", t => t.HotelId, cascadeDelete: true)
@@ -84,21 +77,7 @@ namespace RemoteHotel.DAL.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         HotelName = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Order",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        OrderDateTime = c.DateTime(nullable: false),
-                        RoomId = c.Int(nullable: false),
-                        OrderDateFrom = c.DateTime(nullable: false),
-                        OrderDateTo = c.DateTime(nullable: false),
-                        HotelId = c.Int(nullable: false),
-                        OrderCost = c.Double(nullable: false),
-                        CustomerId = c.Int(),
+                        Address = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -118,20 +97,16 @@ namespace RemoteHotel.DAL.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Rental", "RoomId", "dbo.Room");
-            DropForeignKey("dbo.Room", "FloorId", "dbo.Floor");
-            DropForeignKey("dbo.Floor", "HotelId", "dbo.Hotel");
-            DropForeignKey("dbo.Rental", "CustomerId", "dbo.Customer");
-            DropIndex("dbo.Floor", new[] { "HotelId" });
-            DropIndex("dbo.Room", new[] { "FloorId" });
-            DropIndex("dbo.Rental", new[] { "RoomId" });
-            DropIndex("dbo.Rental", new[] { "CustomerId" });
+            DropForeignKey("dbo.Reservation", "RoomId", "dbo.Room");
+            DropForeignKey("dbo.Room", "HotelId", "dbo.Hotel");
+            DropForeignKey("dbo.Reservation", "CustomerId", "dbo.Customer");
+            DropIndex("dbo.Room", new[] { "HotelId" });
+            DropIndex("dbo.Reservation", new[] { "RoomId" });
+            DropIndex("dbo.Reservation", new[] { "CustomerId" });
             DropTable("dbo.User");
-            DropTable("dbo.Order");
             DropTable("dbo.Hotel");
-            DropTable("dbo.Floor");
             DropTable("dbo.Room");
-            DropTable("dbo.Rental");
+            DropTable("dbo.Reservation");
             DropTable("dbo.Customer");
             DropTable("dbo.AccessLog");
         }

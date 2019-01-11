@@ -15,6 +15,16 @@ namespace RemoteHotel.DAL.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
+        enum RoomType
+        {
+            None,         // integer value = 0
+            Jednoosobowy,      // 1
+            Dwuosobowy,
+            Trzyosobowy,
+            Czteroosobowy,
+            Piecioosobowy 
+        }
+
         protected override void Seed(RemoteHotelContext context)
         {
             //if (System.Diagnostics.Debugger.IsAttached == false)
@@ -54,46 +64,22 @@ namespace RemoteHotel.DAL.Migrations
                     new Room()
                     {
                         Id = 1,
-                        Status = 1,
-                        Beds = 2,
+                        SingleBeds = 2,
+                        DoubleBeds = 1,
+                        RoomType = Enum.GetName(typeof(RoomType), 4),
                         RoomNumber = "123",
                         Standard = 1,
-                        FloorId = 1
+                        HotelId = 1
                     }, new Room()
                     {
                         Id = 2,
-                        Status = 2,
                         Beds = 2,
+                        SingleBeds = 2,
+                        DoubleBeds = 1,
+                        RoomType = Enum.GetName(typeof(RoomType), 4),
                         RoomNumber = "223",
                         Standard = 1,
-                        FloorId = 1
-                    }
-                };
-                var floors = new List<Floor>()
-                {
-                    new Floor()
-                    {
-                        Id = 1,
-                        Level = 0,
-                        Rooms = rooms
-                    },
-                    new Floor()
-                    {
-                        Id = 2,
-                        Level = 1,
-                        Rooms = null
-                    },
-                    new Floor()
-                    {
-                        Id = 3,
-                        Level = 2,
-                        Rooms = null
-                    },
-                    new Floor()
-                    {
-                        Id = 4,
-                        Level = 4,
-                        Rooms = null
+                        HotelId = 1
                     }
                 };
                 var hotels = new List<Hotel>()
@@ -102,57 +88,60 @@ namespace RemoteHotel.DAL.Migrations
                     {
                         Id = 1,
                         HotelName = "HotelNowoczesny",
-                        Floors = floors
+                        Rooms = rooms
                        
                     },
                     new Hotel()
                     {
                         Id = 2,
                         HotelName = "HotelStary",
-                        Floors = null
+                        Rooms = null
                        
                     }
                 };
-                var rentals = new List<Rental>()
+                var reservations = new List<Reservation>()
                 {
-                    new Rental()
+                    new Reservation()
                     {
-                        RentalId = 1,
+                        Id = 1,
                         RoomId = 1,
                         CustomerId = 1,
-                        RoomKey = "ABCD",
+                        ReservationKey = "ABCD",
                         CreateDateTime = DateTime.Now,
-                        ExpiredDateTime = DateTime.Now
+                        CheckInDate = DateTime.Now,
+                        CheckOutDate = DateTime.Now.AddDays(5)
+                        
                     },
-                    new Rental()
+                    new Reservation()
                     {
-                        RentalId = 2,
+                        Id = 2,
                         RoomId = 2,
                         CustomerId = 1,
-                        RoomKey = "QWER",
+                        ReservationKey = "QWER",
                         CreateDateTime = DateTime.Now,
-                        ExpiredDateTime = DateTime.Now
+                        CheckInDate = DateTime.Now,
+                        CheckOutDate = DateTime.Now.AddDays(3)
                     }
                 };
                 var customers = new List<Customer>()
                 {
                     new Customer()
                     {
-                        CustomerId = 1,
+                        Id = 1,
                         CreatedDate = DateTime.Now,
                         Email = "customer1@gmail.com",
                         FirstName = "Customer",
                         LastName = "Separation",
                         Password = "qwerty1",
                         PhoneNumber = "664342546",
-                        Rentals = rentals
+                        Reservations = reservations
                     }
                 };
                 var accessLogs = new List<AccessLog>()
                 {
                     new AccessLog()
                     {
-                        LogId = 1,
+                        Id = 1,
                         CardId = "1234f5f",
                         CreateDate = DateTime.Now,
                         Info = "",
@@ -160,13 +149,12 @@ namespace RemoteHotel.DAL.Migrations
                         PasswordHash = ""
                     }
                 };
-                context.Floors.AddOrUpdate(x => x.Id, floors[0], floors[1], floors[2], floors[3]);
-                context.AccessLogs.AddOrUpdate(x => x.LogId, accessLogs[0]);
+                context.AccessLogs.AddOrUpdate(x => x.Id, accessLogs[0]);
                 context.Users.AddOrUpdate(x => x.Id, users[0]);
                 context.Rooms.AddOrUpdate(x => x.Id, rooms[0], rooms[1]);
                 context.Hotels.AddOrUpdate(x => x.Id, hotels[0], hotels[1]);
-                context.Rentals.AddOrUpdate(x => x.RentalId, rentals[0], rentals[1]);
-                context.Customers.AddOrUpdate(x => x.CustomerId, customers[0]);
+                context.Rentals.AddOrUpdate(x => x.Id, reservations[0], reservations[1]);
+                context.Customers.AddOrUpdate(x => x.Id, customers[0]);
 
                 context.SaveChanges();
             }

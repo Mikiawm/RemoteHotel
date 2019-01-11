@@ -12,7 +12,7 @@ using RemoteHotel.WebApi.Models;
 
 namespace RemoteHotel.WebApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/hotels")]
     [TokenAuthenticate]
     public class HotelController : ApiController
     {
@@ -23,52 +23,77 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
 
+        //[HttpGet]
+        //public IHttpActionResult GetAllHotelsData()
+        //{
+        //    var hotels = this._unitOfWork.Hotels.GetAll().Select(x =>
+        //    new HotelViewModel
+        //    {
+        //        HotelId = x.Id,
+        //        HotelName = x.HotelName,
+        //        Floors = x.Floors.Select(z =>
+        //            new FloorViewModel
+        //            {
+        //                FloorId = z.Id,
+        //                Level = z.Level,
+        //                Rooms = z.Rooms.Select(y =>
+        //                    new RoomViewModel
+        //                    {
+        //                        RoomNumber = y.RoomNumber,
+        //                        Beds = y.Beds,
+        //                        Standard = y.Standard
+        //                    })
+        //            })
+        //    });
+        //    return Ok(hotels);
+        //}
+
         [HttpGet]
-        [Route("hotels")]
-        public IHttpActionResult GetAllHotels()
+        [Route()]
+        public IHttpActionResult GetHotels()
         {
-            var hotels = this._unitOfWork.Hotels.GetAll().Select(x =>
-            new HotelViewModel
+            var hotels = this._unitOfWork.Hotels.GetAll().Select(x => new HotelViewModel()
             {
                 HotelId = x.Id,
-                HotelName = x.HotelName,
-                Floors = x.Floors.Select(z =>
-                    new FloorViewModel
-                    {
-                        FloorId = z.Id,
-                        Level = z.Level,
-                        Rooms = z.Rooms.Select(y =>
-                            new RoomViewModel
-                            {
-                                RoomNumber = y.RoomNumber,
-                                Beds = y.Beds,
-                                Standard = y.Standard
-                            })
-                    })
+                HotelName = x.HotelName
             });
             return Ok(hotels);
         }
 
-        public IHttpActionResult GetFloorsByHotel(int hotelId)
-        {
-            var hotelData = this._unitOfWork.Floors.GetFloorsByHotel(hotelId);
-            return Ok(hotelData);
-        }
+        //[HttpGet]
+        //[Route("HotelData/{hotelId}")]
+        //public IHttpActionResult GetFloorsByHotel(int hotelId)
+        //{
+        //    var hotelData = this._unitOfWork.Floors.GetFloorsByHotel(hotelId).Select(x => new FloorViewModel()
+        //    {
+        //        FloorId = x.Id,
+        //        Level = x.Level,
+        //        Rooms = x.Rooms.Select(y => new RoomViewModel()
+        //        {
+        //            RoomNumber = y.RoomNumber,
+        //            Standard = y.Standard,
+        //            Beds = y.Beds
+        //        })
 
-        public IHttpActionResult AddFloorToHotel([FromBody]FloorViewModel floor)
-        {
-            Floor newFloor = new Floor();
-            newFloor.Level = floor.Level;
-            newFloor.HotelId = floor.HotelId;
+        //    });
+        //    return Ok(hotelData);
+        //}
+        //[HttpPost]
+        //[Route("AddFloor")]
+        //public IHttpActionResult AddFloorToHotel([FromBody]FloorViewModel floor)
+        //{
+        //    Floor newFloor = new Floor();
+        //    newFloor.Level = floor.Level;
+        //    newFloor.HotelId = floor.HotelId;
 
-            this._unitOfWork.Floors.Add(newFloor);
+        //    this._unitOfWork.Floors.Add(newFloor);
 
 
-            return Ok(this._unitOfWork.Complete());
-        }
+        //    return Ok(this._unitOfWork.Complete());
+        //}
 
         [HttpPost]
-        [Route("hotels")]
+        [Route("AddHotel")]
         public IHttpActionResult AddHotel([FromBody]HotelViewModel hotel)
         {
             Hotel newHotel = new Hotel();
