@@ -11,7 +11,7 @@ using RemoteHotel.WebApi.Models;
 
 namespace RemoteHotel.WebApi.Controllers
 {
-    [RoutePrefix("api/hotels")]
+    [RoutePrefix("api")]
     [TokenAuthenticate]
     public class CustomersController : ApiController
     {
@@ -25,6 +25,7 @@ namespace RemoteHotel.WebApi.Controllers
 
 
         [HttpGet]
+        [Route("Customers")]
         public IHttpActionResult GetCustomers()
         {
             var customers = this._unitOfWork.Customers.GetAll()
@@ -39,8 +40,8 @@ namespace RemoteHotel.WebApi.Controllers
                     PhoneNumber = x.PhoneNumber,
                     Reservations = x.Reservations.Select(z => new ReservationViewModel()
                     {
-                        CheckInDateTime = z.CheckInDate,
-                        CheckOutDateTime = z.CheckOutDate,
+                        DateFrom = z.CheckInDate,
+                        DateTo = z.CheckOutDate,
                         ReservationKey = z.ReservationKey
                     })
                 });
@@ -48,11 +49,12 @@ namespace RemoteHotel.WebApi.Controllers
         }
 
         [HttpPost]
+        [Route("Customers")]
         public IHttpActionResult AddCustomer([FromBody] CustomerViewModel customer)
         {
             Customer newCustomer = new Customer();
             newCustomer.PhoneNumber = customer.PhoneNumber;
-            newCustomer.CreatedDate = customer.CreatedDate;
+            newCustomer.CreatedDate = DateTime.Now;
             newCustomer.Email = customer.Email;
             newCustomer.LastName = customer.LastName;
             newCustomer.Password = "";

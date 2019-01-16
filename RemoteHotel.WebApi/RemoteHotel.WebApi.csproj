@@ -126,7 +126,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HotelController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
-    <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -14,11 +14,11 @@ using RemoteHotel.WebApi.Models;
 namespace RemoteHotel.WebApi.Controllers
 {
     [RoutePrefix("api")]
-    public class RoomController : ApiController
+    public class RoomsController : ApiController
     {
         private readonly UnitOfWork _unitOfWork;
 
-        public RoomController()
+        public RoomsController()
         {
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
@@ -67,7 +67,7 @@ namespace RemoteHotel.WebApi.Controllers
                 });
                 return Ok(rooms);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
@@ -90,10 +90,10 @@ namespace RemoteHotel.WebApi.Controllers
                     PasswordHash = rentalCode
                 };
                 this._unitOfWork.AccessLogs.Add(accessLog);
-                
+
                 return Ok(roomStatus);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 AccessLog accessLog = new AccessLog()
                 {
@@ -135,5 +135,31 @@ namespace RemoteHotel.WebApi.Controllers
             return Ok(newRoom.Id);
 
         }
+        [HttpGet]
+        [Route("rooms")]
+        public IHttpActionResult GetFreeRooms(DateTime dateFrom, DateTime dateTo)
+        {
+            try
+            {
+                var rooms = this._unitOfWork.Rooms.GetAll()
+                    .Where(x => !x.Reservations.Any(z =>
+                        z.CheckInDate >= dateFrom && z.CheckOutDate <= dateTo))
+                    .Select(x => new RoomViewModel
+                    {
+                        RoomNumber = x.RoomNumber,
+                        Beds = x.Beds,
+                        SingleBeds = x.SingleBeds,
+                        DoubleBeds = x.DoubleBeds,
+                        Description = x.Description
+                    });
+                return Ok(rooms);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
+
 }

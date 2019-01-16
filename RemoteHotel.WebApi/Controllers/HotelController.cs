@@ -12,7 +12,7 @@ using RemoteHotel.WebApi.Models;
 
 namespace RemoteHotel.WebApi.Controllers
 {
-    [RoutePrefix("api/hotels")]
+    [RoutePrefix("api")]
     [TokenAuthenticate]
     public class HotelController : ApiController
     {
@@ -49,7 +49,7 @@ namespace RemoteHotel.WebApi.Controllers
         //}
 
         [HttpGet]
-        [Route()]
+        [Route("hotels")]
         public IHttpActionResult GetHotels()
         {
             var hotels = this._unitOfWork.Hotels.GetAll().Select(x => new HotelViewModel()
@@ -93,7 +93,7 @@ namespace RemoteHotel.WebApi.Controllers
         //}
 
         [HttpPost]
-        [Route("AddHotel")]
+        [Route("hotels")]
         public IHttpActionResult AddHotel([FromBody]HotelViewModel hotel)
         {
             Hotel newHotel = new Hotel();

@@ -9,8 +9,8 @@ namespace RemoteHotel.WebApi.Models
     {
         public int CustomerId { get; set; }
         public DateTime CreateDateTime { get; set; }
-        public DateTime CheckInDateTime { get; set; }
-        public DateTime CheckOutDateTime { get; set; }
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
         public int RoomId { get; set; }
         public string ReservationKey { get; set; }
         public int ReservationId { get; set; }
