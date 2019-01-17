@@ -8,12 +8,14 @@ using System.Web.Http;
 using RemoteHotel.DAL;
 using RemoteHotel.DAL.Methods;
 using RemoteHotel.DAL.Models;
+using RemoteHotel.WebApi.Attributes;
 using RemoteHotel.WebApi.Models;
 using RemoteHotel.WebApi.Services;
 
 namespace RemoteHotel.WebApi.Controllers
 {
     [RoutePrefix("api")]
+    [TokenAuthenticate]
     public class ReservationsConrtoller : ApiController
     {
         private readonly UnitOfWork _unitOfWork;
@@ -32,8 +34,9 @@ namespace RemoteHotel.WebApi.Controllers
                 var room = this._unitOfWork.Rooms.Get(reservation.RoomId);
                 string roomCode = RoomCodeService.GenerateRoomCode();
 
-                this._unitOfWork.Reservations.Add(customer, room, roomCode, reservation.DateFrom, reservation.DateTo);
+                int returnInt = this._unitOfWork.Reservations.Add(customer, room, roomCode, reservation.DateFrom, reservation.DateTo);
                 this._unitOfWork.Complete();
+                return Ok(returnInt);
             }
             catch (Exception e)
             {
@@ -41,12 +44,6 @@ namespace RemoteHotel.WebApi.Controllers
                 throw;
             }
 
-
-            using (var unitOfWork = new UnitOfWork(new RemoteHotelContext()))
-            {
-
-            }
-            return Ok();
         }
 
         [HttpGet]
@@ -55,11 +52,11 @@ namespace RemoteHotel.WebApi.Controllers
         {
             try
             {
-               var reservations =  this._unitOfWork.Reservations.GetAll().Select(x => new ReservationViewModel()
+                var reservations = this._unitOfWork.Reservations.GetAll().Select(x => new ReservationViewModel()
                 {
                     CreateDateTime = x.CreateDateTime,
                     DateFrom = x.CheckInDate,
-                    DateTo= x.CheckOutDate,
+                    DateTo = x.CheckOutDate,
                     RoomId = x.RoomId,
                     ReservationKey = x.ReservationKey,
                     ReservationId = x.Id
@@ -75,7 +72,7 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpPut]
         [Route("reservations")]
-        public IHttpActionResult EditReservation([FromBody]ReservationViewModel reservation )
+        public IHttpActionResult EditReservation([FromBody]ReservationViewModel reservation)
         {
             return BadRequest();
         }

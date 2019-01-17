@@ -8,7 +8,7 @@ namespace RemoteHotel.DAL.Interfaces
 {
     public interface IReservationRepository : IRepository<Reservation>
     {
-        void Add(Customer customer, Room room, string key, DateTime checkInDateTime, DateTime checkOutDateTime);
+        int Add(Customer customer, Room room, string key, DateTime checkInDateTime, DateTime checkOutDateTime);
 
     }
 }

@@ -7,6 +7,7 @@ namespace RemoteHotel.WebApi.Models
 {
     public class RoomViewModel
     {
+        public int RoomId { get; set; }
         public int HotelId { get; set; }
         public string RoomNumber { get; set; }
         public int Beds { get; set; }

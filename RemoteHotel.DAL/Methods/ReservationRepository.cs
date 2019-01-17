@@ -17,7 +17,7 @@ namespace RemoteHotel.DAL.Methods
             this._context = context;
         }
 
-        public void Add(Customer customer, Room room, string key, DateTime checkInDateTime, DateTime checkOutDateTime)
+        public int Add(Customer customer, Room room, string key, DateTime checkInDateTime, DateTime checkOutDateTime)
         {
             var newReservation = new Reservation
             {
@@ -31,6 +31,7 @@ namespace RemoteHotel.DAL.Methods
                 CheckOutDate = checkOutDateTime
             };
             Context.Set<Reservation>().Add(newReservation);
+            return newReservation.Id;
         }
     }
 }

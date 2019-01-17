@@ -34,8 +34,15 @@ namespace RemoteHotel.DAL
             BuildHotel(modelBuilder);
             BuildUser(modelBuilder);
             BuildAccessLog(modelBuilder);
+            BuildCustomer(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        private static void BuildCustomer(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Customer>()
+                .HasKey(t => t.Id);
         }
 
         private static void BuildAccessLog(DbModelBuilder modelBuilder)

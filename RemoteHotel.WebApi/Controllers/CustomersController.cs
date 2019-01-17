@@ -61,8 +61,10 @@ namespace RemoteHotel.WebApi.Controllers
             newCustomer.FirstName = customer.FirstName;
 
             this._unitOfWork.Customers.Add(newCustomer);
+            this._unitOfWork.Complete();
+            int x = newCustomer.Id;
 
-            return Ok(this._unitOfWork.Complete() > 0);
+            return Ok(newCustomer.Id);
         }
 
     }
