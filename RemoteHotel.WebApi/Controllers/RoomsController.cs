@@ -51,27 +51,27 @@ namespace RemoteHotel.WebApi.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Route("rooms")]
-        //public IHttpActionResult GetAll()
-        //{
-        //    try
-        //    {
-        //        var rooms = this._unitOfWork.Rooms.GetAllRooms().Select(x => new RoomViewModel()
-        //        {
-        //            RoomNumber = x.RoomNumber,
-        //            SingleBeds = x.SingleBeds,
-        //            DoubleBeds = x.DoubleBeds,
-        //            Beds = x.Beds,
-        //            Description = x.Description
-        //        });
-        //        return Ok(rooms);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.BadRequest);
-        //    }
-        //}
+        [HttpGet]
+        [Route("rooms")]
+        public IHttpActionResult GetAll()
+        {
+            try
+            {
+                var rooms = this._unitOfWork.Rooms.GetAllRooms().Select(x => new RoomViewModel()
+                {
+                    RoomNumber = x.RoomNumber,
+                    SingleBeds = x.SingleBeds,
+                    DoubleBeds = x.DoubleBeds,
+                    Beds = x.Beds,
+                    Description = x.Description
+                });
+                return Ok(rooms);
+            }
+            catch (Exception e)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
+        }
 
         [HttpGet]
         [Route("rooms/openRoom/{rentalCode}")]
@@ -143,7 +143,8 @@ namespace RemoteHotel.WebApi.Controllers
             {
                 var rooms = this._unitOfWork.Rooms.GetAll()
                     .Where(x => !x.Reservations.Any(z =>
-                        z.CheckInDate >= dateFrom && z.CheckOutDate <= dateTo))
+                        (z.CheckInDate >= dateFrom && z.CheckInDate <= dateTo) 
+                        || (z.CheckOutDate >= dateFrom && z.CheckOutDate <= dateTo)))
                     .Select(x => new RoomViewModel
                     {
                         RoomId = x.Id,

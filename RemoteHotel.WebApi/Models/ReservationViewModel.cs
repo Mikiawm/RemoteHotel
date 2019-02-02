@@ -14,5 +14,6 @@ namespace RemoteHotel.WebApi.Models
         public int RoomId { get; set; }
         public string ReservationKey { get; set; }
         public int ReservationId { get; set; }
+        public string RoomNumber { get; internal set; }
     }
 }

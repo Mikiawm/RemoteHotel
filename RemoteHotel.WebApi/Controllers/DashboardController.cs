@@ -73,6 +73,7 @@ namespace RemoteHotel.WebApi.Controllers
                     DateFrom = x.CheckInDate,
                     DateTo = x.CheckOutDate,
                     RoomId = x.RoomId,
+                    RoomNumber = x.Room.RoomNumber,
                     ReservationKey = x.ReservationKey,
                     ReservationId = x.Id
                 });

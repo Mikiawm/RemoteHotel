@@ -64,7 +64,7 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork.Complete();
             int x = newCustomer.Id;
 
-            return Ok(newCustomer.Id);
+            return Ok(newCustomer);
         }
 
     }
