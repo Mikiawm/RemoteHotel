@@ -7,13 +7,13 @@ namespace RemoteHotel.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class _09022019 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_09022019));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901092233195_initial"; }
+            get { return "201902092247586_09-02-2019"; }
         }
         
         string IMigrationMetadata.Source

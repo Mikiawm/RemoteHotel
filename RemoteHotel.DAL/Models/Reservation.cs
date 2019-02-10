@@ -16,7 +16,9 @@ namespace RemoteHotel.DAL.Models
 
         public int RoomId { get; set; }
         public virtual Room Room { get; set; }
-        
+
+        public virtual ICollection<AccessLog> AccessLogs { get; set; }
+
         public string ReservationKey { get; set; }
 
         public DateTime CreateDateTime { get; set; }
@@ -24,6 +26,6 @@ namespace RemoteHotel.DAL.Models
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
 
-        public string Comment { get; set; }
+        public Boolean Accepted { get; set; }
     }
 }

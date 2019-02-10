@@ -98,15 +98,14 @@
     <Compile Include="Methods\Repository.cs" />
     <Compile Include="Methods\RoomRepository.cs" />
     <Compile Include="Methods\UnitOfWork.cs" />
-    <Compile Include="Migrations\201901092233195_initial.cs" />
-    <Compile Include="Migrations\201901092233195_initial.Designer.cs">
-      <DependentUpon>201901092233195_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201902092247586_09-02-2019.cs" />
+    <Compile Include="Migrations\201902092247586_09-02-2019.Designer.cs">
+      <DependentUpon>201902092247586_09-02-2019.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Hotel.cs" />
-    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -124,8 +123,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901092233195_initial.resx">
-      <DependentUpon>201901092233195_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902092247586_09-02-2019.resx">
+      <DependentUpon>201902092247586_09-02-2019.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

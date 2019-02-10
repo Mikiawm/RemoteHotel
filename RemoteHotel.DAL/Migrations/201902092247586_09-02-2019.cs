@@ -3,7 +3,7 @@ namespace RemoteHotel.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initial : DbMigration
+    public partial class _09022019 : DbMigration
     {
         public override void Up()
         {
@@ -15,10 +15,30 @@ namespace RemoteHotel.DAL.Migrations
                         CreateDate = c.DateTime(nullable: false),
                         Info = c.String(),
                         Status = c.Boolean(nullable: false),
-                        CardId = c.String(),
-                        PasswordHash = c.String(),
+                        ReservationId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Reservation", t => t.ReservationId, cascadeDelete: true)
+                .Index(t => t.ReservationId);
+            
+            CreateTable(
+                "dbo.Reservation",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
+                        RoomId = c.Int(nullable: false),
+                        ReservationKey = c.String(nullable: false),
+                        CreateDateTime = c.DateTime(nullable: false),
+                        CheckInDate = c.DateTime(nullable: false),
+                        CheckOutDate = c.DateTime(nullable: false),
+                        Accepted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Customer", t => t.CustomerId, cascadeDelete: true)
+                .ForeignKey("dbo.Room", t => t.RoomId, cascadeDelete: true)
+                .Index(t => t.CustomerId)
+                .Index(t => t.RoomId);
             
             CreateTable(
                 "dbo.Customer",
@@ -35,25 +55,6 @@ namespace RemoteHotel.DAL.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Reservation",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
-                        RoomId = c.Int(nullable: false),
-                        ReservationKey = c.String(nullable: false),
-                        CreateDateTime = c.DateTime(nullable: false),
-                        CheckInDate = c.DateTime(nullable: false),
-                        CheckOutDate = c.DateTime(nullable: false),
-                        Comment = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customer", t => t.CustomerId, cascadeDelete: true)
-                .ForeignKey("dbo.Room", t => t.RoomId, cascadeDelete: true)
-                .Index(t => t.CustomerId)
-                .Index(t => t.RoomId);
-            
-            CreateTable(
                 "dbo.Room",
                 c => new
                     {
@@ -61,11 +62,8 @@ namespace RemoteHotel.DAL.Migrations
                         RoomNumber = c.String(nullable: false),
                         Standard = c.Int(nullable: false),
                         Beds = c.Int(nullable: false),
-                        Description = c.String(),
-                        RoomType = c.String(),
-                        HotelId = c.Int(nullable: false),
-                        SingleBeds = c.Int(nullable: false),
                         DoubleBeds = c.Int(nullable: false),
+                        HotelId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Hotel", t => t.HotelId, cascadeDelete: true)
@@ -77,19 +75,16 @@ namespace RemoteHotel.DAL.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         HotelName = c.String(nullable: false),
-                        Address = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.User",
+                "dbo.Employee",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Login = c.String(nullable: false),
                         Password = c.String(nullable: false),
-                        Status = c.Int(nullable: false),
-                        AccountType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -100,14 +95,16 @@ namespace RemoteHotel.DAL.Migrations
             DropForeignKey("dbo.Reservation", "RoomId", "dbo.Room");
             DropForeignKey("dbo.Room", "HotelId", "dbo.Hotel");
             DropForeignKey("dbo.Reservation", "CustomerId", "dbo.Customer");
+            DropForeignKey("dbo.AccessLog", "ReservationId", "dbo.Reservation");
             DropIndex("dbo.Room", new[] { "HotelId" });
             DropIndex("dbo.Reservation", new[] { "RoomId" });
             DropIndex("dbo.Reservation", new[] { "CustomerId" });
-            DropTable("dbo.User");
+            DropIndex("dbo.AccessLog", new[] { "ReservationId" });
+            DropTable("dbo.Employee");
             DropTable("dbo.Hotel");
             DropTable("dbo.Room");
-            DropTable("dbo.Reservation");
             DropTable("dbo.Customer");
+            DropTable("dbo.Reservation");
             DropTable("dbo.AccessLog");
         }
     }

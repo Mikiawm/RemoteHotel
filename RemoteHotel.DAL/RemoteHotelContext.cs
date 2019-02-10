@@ -49,16 +49,16 @@ namespace RemoteHotel.DAL
         {
             modelBuilder.Entity<AccessLog>()
                 .HasKey(t => t.Id);
+
         }
 
         private static void BuildUser(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasKey(t => t.Id);
+                .ToTable("Employee");
 
             modelBuilder.Entity<User>()
-                .Property(t => t.AccountType)
-                .IsRequired();
+                .HasKey(t => t.Id);
 
             modelBuilder.Entity<User>()
                 .Property(t => t.Login)
@@ -92,7 +92,7 @@ namespace RemoteHotel.DAL
 
             modelBuilder.Entity<Room>()
                 .Property(t => t.Beds)
-                .IsRequired(); 
+                .IsRequired();
 
             modelBuilder.Entity<Room>()
                 .HasKey(x => x.Id);
@@ -107,11 +107,14 @@ namespace RemoteHotel.DAL
                 .HasRequired(t => t.Customer)
                 .WithMany(t => t.Reservations)
                 .HasForeignKey(t => t.CustomerId);
-
             modelBuilder.Entity<Reservation>()
-                .HasRequired(t => t.Room)
-                .WithMany(t => t.Reservations)
-                .HasForeignKey(t => t.RoomId);
+                .HasMany(t => t.AccessLogs)
+                .WithRequired(t => t.Reservation)
+                .HasForeignKey(t => t.ReservationId);
+            modelBuilder.Entity<Reservation>()
+                    .HasRequired(t => t.Room)
+                    .WithMany(t => t.Reservations)
+                    .HasForeignKey(t => t.RoomId);
 
             modelBuilder.Entity<Reservation>()
                 .Property(t => t.ReservationKey)

@@ -14,7 +14,5 @@ namespace RemoteHotel.WebApi.Models
         public int Standard { get; set; }
         public int SingleBeds { get; set; }
         public int DoubleBeds { get; set; }
-        public string Description { get; set; }
-        public string RoomType { get; set; }
     }
 }

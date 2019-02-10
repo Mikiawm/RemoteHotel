@@ -33,10 +33,8 @@ namespace RemoteHotel.WebApi.Controllers
                 var roomViewModel = new RoomViewModel()
                 {
                     RoomNumber = room.RoomNumber,
-                    SingleBeds = room.SingleBeds,
                     DoubleBeds = room.DoubleBeds,
-                    Beds = room.Beds,
-                    RoomType = room.RoomType
+                    Beds = room.Beds
                 };
                 return Ok(roomViewModel);
             }
@@ -59,11 +57,11 @@ namespace RemoteHotel.WebApi.Controllers
             {
                 var rooms = this._unitOfWork.Rooms.GetAllRooms().Select(x => new RoomViewModel()
                 {
+                    RoomId = x.Id,
+                    HotelId = x.HotelId,
                     RoomNumber = x.RoomNumber,
-                    SingleBeds = x.SingleBeds,
                     DoubleBeds = x.DoubleBeds,
-                    Beds = x.Beds,
-                    Description = x.Description
+                    Beds = x.Beds
                 });
                 return Ok(rooms);
             }
@@ -74,20 +72,18 @@ namespace RemoteHotel.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("rooms/openRoom/{rentalCode}")]
-        public IHttpActionResult OpenRoom(string rentalCode, string cardId, string roomNumber)
+        [Route("rooms/openRoom")]
+        public IHttpActionResult OpenRoom(string codePassword, string roomNumber)
         {
             try
             {
-                var roomStatus = this._unitOfWork.Rooms.OpenRoom(rentalCode, roomNumber);
+                var roomStatus = this._unitOfWork.Rooms.OpenRoom(codePassword, roomNumber);
 
                 AccessLog accessLog = new AccessLog()
                 {
                     CreateDate = DateTime.Now,
-                    CardId = cardId,
                     Info = "",
-                    Status = roomStatus,
-                    PasswordHash = rentalCode
+                    Status = roomStatus
                 };
                 this._unitOfWork.AccessLogs.Add(accessLog);
 
@@ -98,10 +94,8 @@ namespace RemoteHotel.WebApi.Controllers
                 AccessLog accessLog = new AccessLog()
                 {
                     CreateDate = DateTime.Now,
-                    CardId = cardId,
                     Info = ex.Message,
-                    Status = false,
-                    PasswordHash = rentalCode
+                    Status = false
                 };
                 this._unitOfWork.AccessLogs.Add(accessLog);
 
@@ -135,6 +129,35 @@ namespace RemoteHotel.WebApi.Controllers
             return Ok(newRoom.Id);
 
         }
+
+        [HttpDelete]
+        [Route("rooms")]
+        public IHttpActionResult DeleteRoom(int roomId)
+        {
+            this._unitOfWork.Rooms.Remove(roomId);
+            this._unitOfWork.Complete();
+
+            return Ok(this._unitOfWork.Complete() > 0);
+        }
+
+        [HttpPut]
+        [Route("rooms")]
+        public IHttpActionResult EditRoom([FromBody]RoomViewModel room)
+        {
+            Room roomToUpdate = new Room();
+            roomToUpdate.Id = room.RoomId;
+            roomToUpdate.HotelId = room.HotelId;
+            roomToUpdate.RoomNumber = room.RoomNumber;
+            roomToUpdate.Beds = room.Beds;
+            roomToUpdate.Standard = room.Standard;
+            roomToUpdate.DoubleBeds = room.DoubleBeds;
+
+            this._unitOfWork.Rooms.Update(roomToUpdate);
+            this._unitOfWork.Complete();
+
+            return Ok(roomToUpdate.Id);
+
+        }
         [HttpGet]
         [Route("rooms")]
         public IHttpActionResult GetFreeRooms(DateTime dateFrom, DateTime dateTo)
@@ -150,11 +173,46 @@ namespace RemoteHotel.WebApi.Controllers
                         RoomId = x.Id,
                         RoomNumber = x.RoomNumber,
                         Beds = x.Beds,
-                        SingleBeds = x.SingleBeds,
-                        DoubleBeds = x.DoubleBeds,
-                        Description = x.Description
+                        DoubleBeds = x.DoubleBeds
                     });
                 return Ok(rooms);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpGet]
+        [Route("rooms")]
+        public IHttpActionResult GetFreeRoomsGroupedBy(DateTime dateFrom, DateTime dateTo, string groupedBy)
+        {
+            try
+            {
+                var rooms = this._unitOfWork.Rooms.GetAll()
+                    .Where(x => !x.Reservations.Any(z =>
+                        (z.CheckInDate >= dateFrom && z.CheckInDate <= dateTo)
+                        || (z.CheckOutDate >= dateFrom && z.CheckOutDate <= dateTo)))
+                    .Select(x => new RoomViewModel
+                    {
+                        RoomId = x.Id,
+                        RoomNumber = x.RoomNumber,
+                        Beds = x.Beds,
+                        DoubleBeds = x.DoubleBeds
+                    });
+
+                if (groupedBy == "standard")
+                {
+                    return Ok(rooms.GroupBy(x => x.Standard));
+                }
+                else if(groupedBy == "doubleBeds")
+                {
+                    return Ok(rooms.GroupBy(x => x.DoubleBeds));
+                }
+                else
+                {
+                    return Ok(rooms.GroupBy(x => x.Beds));
+                }
             }
             catch (Exception e)
             {

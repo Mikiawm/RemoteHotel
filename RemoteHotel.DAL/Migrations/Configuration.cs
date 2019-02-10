@@ -39,34 +39,15 @@ namespace RemoteHotel.DAL.Migrations
                     {
                         Id = 1,
                         Login = "login1",
-                        Password = "test1",
-                        Status = 1,
-                        AccountType = 1
-                    },
-                    new User()
-                    {
-                        Id = 2,
-                        Login = "login2",
-                        Password = "test2",
-                        Status = 1,
-                        AccountType = 1
-                    },
-                    new User()
-                    {
-                        Id = 3,
-                        Login = "login3",
-                        Password = "test3",
-                        Status = 1,
-                        AccountType = 1
+                        Password = "test1"
                     }
                 };
                 var rooms = new List<Room>{
                     new Room()
                     {
                         Id = 1,
-                        SingleBeds = 2,
-                        DoubleBeds = 1,
-                        RoomType = Enum.GetName(typeof(RoomType), 4),
+                        Beds = 2,
+                        DoubleBeds = 2,
                         RoomNumber = "123",
                         Standard = 1,
                         HotelId = 1
@@ -74,9 +55,7 @@ namespace RemoteHotel.DAL.Migrations
                     {
                         Id = 2,
                         Beds = 2,
-                        SingleBeds = 2,
                         DoubleBeds = 1,
-                        RoomType = Enum.GetName(typeof(RoomType), 4),
                         RoomNumber = "223",
                         Standard = 1,
                         HotelId = 1
@@ -90,13 +69,17 @@ namespace RemoteHotel.DAL.Migrations
                         HotelName = "HotelNowoczesny",
                         Rooms = rooms
                        
-                    },
-                    new Hotel()
+                    }
+                };
+                var accessLogs = new List<AccessLog>()
+                {
+                    new AccessLog()
                     {
-                        Id = 2,
-                        HotelName = "HotelStary",
-                        Rooms = null
-                       
+                        Id = 1,
+                        CreateDate = DateTime.Now,
+                        Info = "Sample",
+                        Status = true,
+                        ReservationId = 1
                     }
                 };
                 var reservations = new List<Reservation>()
@@ -109,8 +92,9 @@ namespace RemoteHotel.DAL.Migrations
                         ReservationKey = "ABCD",
                         CreateDateTime = DateTime.Now,
                         CheckInDate = DateTime.Now,
-                        CheckOutDate = DateTime.Now.AddDays(5)
-                        
+                        CheckOutDate = DateTime.Now.AddDays(5),
+                        AccessLogs = accessLogs
+
                     },
                     new Reservation()
                     {
@@ -120,7 +104,8 @@ namespace RemoteHotel.DAL.Migrations
                         ReservationKey = "QWER",
                         CreateDateTime = DateTime.Now,
                         CheckInDate = DateTime.Now,
-                        CheckOutDate = DateTime.Now.AddDays(3)
+                        CheckOutDate = DateTime.Now.AddDays(3),
+                        AccessLogs = null
                     }
                 };
                 var customers = new List<Customer>()
@@ -137,22 +122,11 @@ namespace RemoteHotel.DAL.Migrations
                         Reservations = reservations
                     }
                 };
-                var accessLogs = new List<AccessLog>()
-                {
-                    new AccessLog()
-                    {
-                        Id = 1,
-                        CardId = "1234f5f",
-                        CreateDate = DateTime.Now,
-                        Info = "",
-                        Status = true,
-                        PasswordHash = ""
-                    }
-                };
+                
                 context.AccessLogs.AddOrUpdate(x => x.Id, accessLogs[0]);
                 context.Users.AddOrUpdate(x => x.Id, users[0]);
                 context.Rooms.AddOrUpdate(x => x.Id, rooms[0], rooms[1]);
-                context.Hotels.AddOrUpdate(x => x.Id, hotels[0], hotels[1]);
+                context.Hotels.AddOrUpdate(x => x.Id, hotels[0]);
                 context.Rentals.AddOrUpdate(x => x.Id, reservations[0], reservations[1]);
                 context.Customers.AddOrUpdate(x => x.Id, customers[0]);
 

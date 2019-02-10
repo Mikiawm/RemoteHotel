@@ -21,6 +21,15 @@ namespace RemoteHotel.DAL.Methods
         {
             return _context.Rooms.FirstOrDefault(x => x.RoomNumber == roomNumber);
         }
+        public Room Update(Room room)
+        {
+            Room roomToUpdate = _context.Rooms.FirstOrDefault(x => x.Id == room.Id);
+            roomToUpdate.RoomNumber = room.RoomNumber;
+            roomToUpdate.Standard = room.Standard;
+            roomToUpdate.Beds = room.Beds;
+            roomToUpdate.DoubleBeds = room.DoubleBeds;
+            return roomToUpdate;
+        }
 
         public Object GetRoomsByHotelId(int hotelId)
         {

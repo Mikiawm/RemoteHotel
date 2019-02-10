@@ -9,6 +9,7 @@ using RemoteHotel.DAL;
 using RemoteHotel.DAL.Methods;
 using RemoteHotel.DAL.Models;
 using RemoteHotel.WebApi.Attributes;
+using RemoteHotel.WebApi.Models;
 
 namespace RemoteHotel.WebApi.Controllers
 {
@@ -23,16 +24,6 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
 
-        public class AccessLogViewModel
-        {
-            public int LogId { get; set; }
-            public string CardId { get; set; }
-            public DateTime CreateDate { get; set; }
-            public string PasswordHash { get; set; }
-            public string Info { get; set; }
-            public bool Status { get; set; }
-        }
-
         [HttpGet]
         [Route("accessLogs")]
         public IHttpActionResult GetAll()
@@ -45,9 +36,9 @@ namespace RemoteHotel.WebApi.Controllers
                     {
                         LogId = x.Id,
                         CreateDate = x.CreateDate,
-                        PasswordHash = x.PasswordHash,
                         Info = x.Info,
-                        Status = x.Status
+                        Status = x.Status,
+                        ReservationId = x.ReservationId
                     };
                     return accessLog;
                 });
@@ -65,11 +56,10 @@ namespace RemoteHotel.WebApi.Controllers
         {
             this._unitOfWork.AccessLogs.Add(new AccessLog()
             {
-                CardId = item.CardId,
                 CreateDate = DateTime.Now,
                 Info = item.Info,
-                PasswordHash = item.PasswordHash,
-                Status = item.Status
+                Status = item.Status,
+                ReservationId = item.ReservationId
             });
             this._unitOfWork.Complete();
             var response = new HttpResponseMessage(HttpStatusCode.Created)

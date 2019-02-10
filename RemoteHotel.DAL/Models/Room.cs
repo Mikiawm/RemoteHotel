@@ -17,18 +17,12 @@ namespace RemoteHotel.DAL.Models
 
         public int Beds { get; set; }
 
+        public int DoubleBeds { get; set; }
+
         public virtual ICollection<Reservation> Reservations { get; set; }
-
-        public string Description { get; set; }
-
-        public string RoomType { get; set; }
 
         public virtual Hotel Hotel{ get; set; }
 
         public virtual int HotelId { get; set; }
-
-        public int SingleBeds { get; set; }
-
-        public int DoubleBeds { get; set; }
     }
 }

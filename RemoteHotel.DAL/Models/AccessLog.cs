@@ -15,8 +15,7 @@ namespace RemoteHotel.DAL.Models
 
         public bool Status { get; set; }
 
-        public string CardId { get; set; }
-
-        public string PasswordHash { get; set; }
+        public int ReservationId { get; set; }
+        public virtual Reservation Reservation { get; set; }
     }
 }

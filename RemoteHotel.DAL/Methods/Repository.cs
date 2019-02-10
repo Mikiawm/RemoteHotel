@@ -20,9 +20,10 @@ namespace RemoteHotel.DAL.Methods
             Context.Set<TEntity>().Add(entity);
         }
 
-        public void Remove(TEntity entity)
+        public void Remove(int id)
         {
-            Context.Set<TEntity>().Remove(entity);
+            var entityToDelete = Context.Set<TEntity>().Find(id);
+            Context.Set<TEntity>().Remove(entityToDelete);
         }
 
         public TEntity Get(int id)

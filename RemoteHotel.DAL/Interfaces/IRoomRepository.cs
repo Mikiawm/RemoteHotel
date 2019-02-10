@@ -9,6 +9,7 @@ namespace RemoteHotel.DAL.Interfaces
     public interface IRoomRepository : IRepository<Room>
     {
         Room Get(string roomNumber);
+        Room Update(Room room);
         Object GetRoomsByHotelId(int hotelId);
         IEnumerable<Room> GetAllRooms();
         bool OpenRoom(string rentalCode, string roomNumber);
