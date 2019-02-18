@@ -15,5 +15,7 @@ namespace RemoteHotel.WebApi.Models
         public string PhoneNumber { get; set; }
         public IEnumerable<ReservationViewModel> Reservations { get; set; }
         public string FirstName { get; set; }
+        public int AccountType { get; internal set; }
+        public bool Authorized { get; internal set; }
     }
 }

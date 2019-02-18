@@ -19,6 +19,8 @@ namespace RemoteHotel.DAL.Models
 
         public DateTime CreatedDate { get; set; }
 
+        public int AccountType { get; set; }
+
         public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }

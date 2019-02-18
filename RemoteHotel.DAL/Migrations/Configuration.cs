@@ -22,7 +22,7 @@ namespace RemoteHotel.DAL.Migrations
             Dwuosobowy,
             Trzyosobowy,
             Czteroosobowy,
-            Piecioosobowy 
+            Piecioosobowy
         }
 
         protected override void Seed(RemoteHotelContext context)
@@ -68,7 +68,7 @@ namespace RemoteHotel.DAL.Migrations
                         Id = 1,
                         HotelName = "HotelNowoczesny",
                         Rooms = rooms
-                       
+
                     }
                 };
                 var accessLogs = new List<AccessLog>()
@@ -117,18 +117,55 @@ namespace RemoteHotel.DAL.Migrations
                         Email = "customer1@gmail.com",
                         FirstName = "Customer",
                         LastName = "Separation",
-                        Password = "qwerty1",
+                        Password = "",
+                        AccountType = 1,
                         PhoneNumber = "664342546",
                         Reservations = reservations
-                    }
+                    },
+                    new Customer()
+                    {
+                        Id = 2,
+                        CreatedDate = DateTime.Now,
+                        Email = "customer2@gmail.com",
+                        FirstName = "Wincenty",
+                        LastName = "Wangog",
+                        Password = "qwerty2",
+                        AccountType = 2,
+                        PhoneNumber = "664342546",
+                        Reservations = null
+                    },
+                    new Customer()
+                    {
+                        Id = 3,
+                        CreatedDate = DateTime.Now,
+                        Email = "customer1@gmail.com",
+                        FirstName = "Michal",
+                        LastName = "Sobanski",
+                        Password = "",
+                        AccountType = 1,
+                        PhoneNumber = "312535643",
+                        Reservations = null
+                    },
+                    new Customer()
+                    {
+                        Id = 4,
+                        CreatedDate = DateTime.Now,
+                        Email = "customer1@gmail.com",
+                        FirstName = "Customer",
+                        LastName = "Jakub",
+                        Password = "Kokoszko",
+                        AccountType = 2,
+                        PhoneNumber = "956434534",
+                        Reservations = null
+                    },
                 };
-                
+
                 context.AccessLogs.AddOrUpdate(x => x.Id, accessLogs[0]);
                 context.Users.AddOrUpdate(x => x.Id, users[0]);
                 context.Rooms.AddOrUpdate(x => x.Id, rooms[0], rooms[1]);
                 context.Hotels.AddOrUpdate(x => x.Id, hotels[0]);
                 context.Rentals.AddOrUpdate(x => x.Id, reservations[0], reservations[1]);
-                context.Customers.AddOrUpdate(x => x.Id, customers[0]);
+                context.Customers.AddOrUpdate(x => x.Id, customers[0], customers[1], customers[2], customers[3]);
 
                 context.SaveChanges();
             }

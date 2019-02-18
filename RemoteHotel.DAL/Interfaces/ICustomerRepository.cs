@@ -8,6 +8,6 @@ namespace RemoteHotel.DAL.Interfaces
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
-        IEnumerable<Customer> GetCustomersByHotelId(int hotelId);
+        Customer AddAuthorization(int customerId, string password);
     }
 }

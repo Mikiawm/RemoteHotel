@@ -26,6 +26,6 @@ namespace RemoteHotel.DAL.Models
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
 
-        public Boolean Accepted { get; set; }
+        public Boolean Status { get; set; }
     }
 }

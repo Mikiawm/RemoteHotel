@@ -19,11 +19,14 @@ namespace RemoteHotel.DAL.Methods
         {
             this._context = context;
         }
-
-
-        public IEnumerable<Customer> GetCustomersByHotelId(int hotelId)
+        public Customer AddAuthorization(int customerId, string password)
         {
-            return _context.Customers.Where(x => x.Reservations.Any(z => z.Room.HotelId == hotelId));
+            var customer = _context.Customers.Where(x => x.Id == customerId).First();
+
+            customer.Password = password;
+            customer.AccountType = 2;
+
+            return customer;
         }
     }
 }

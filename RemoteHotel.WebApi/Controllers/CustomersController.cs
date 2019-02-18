@@ -36,7 +36,9 @@ namespace RemoteHotel.WebApi.Controllers
                     Email = x.Email,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
+                    Authorized = x.AccountType > 1,
                     Password = x.Password,
+                    AccountType = x.AccountType,
                     PhoneNumber = x.PhoneNumber,
                     Reservations = x.Reservations.Select(z => new ReservationViewModel()
                     {
@@ -67,5 +69,15 @@ namespace RemoteHotel.WebApi.Controllers
             return Ok(newCustomer);
         }
 
+        [HttpPut]
+        [Route("Customers")]
+        public IHttpActionResult AddAuthorization([FromUri]int customerId, [FromUri]string password)
+        {
+            var customer = this._unitOfWork.Customers.AddAuthorization(customerId, password);
+
+            return Ok(this._unitOfWork.Complete() > 0);
+        }
+
     }
+
 }

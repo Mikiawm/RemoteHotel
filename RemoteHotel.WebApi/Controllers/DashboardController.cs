@@ -25,19 +25,6 @@ namespace RemoteHotel.WebApi.Controllers
             this._unitOfWork = new UnitOfWork(new RemoteHotelContext());
         }
 
-        [HttpGet]
-        [Route("hotel/{hotelId}")]
-        public IHttpActionResult GetHotelData(int hotelId)
-        {
-
-            var dashboardData = new
-            {
-                Rooms = this._unitOfWork.Customers.GetCustomersByHotelId(hotelId),
-                Customers = this._unitOfWork.Rooms.GetRoomsByHotelId(hotelId)
-            };
-            return Ok(dashboardData);
-        }
-
         [HttpPost]
         [Route("reservations")]
         public IHttpActionResult CreateNewReservation([FromBody] ReservationViewModel reservation)
@@ -62,21 +49,23 @@ namespace RemoteHotel.WebApi.Controllers
 
         [HttpGet]
         [Route("reservations")]
-        public IHttpActionResult GetAllReservation()
+        public IHttpActionResult GetAllReservations(bool status)
         {
             try
             {
-                var reservations = this._unitOfWork.Reservations.GetAll().Select(x => new ReservationViewModel()
-                {
-                    CustomerId = x.CustomerId,
-                    CreateDateTime = x.CreateDateTime,
-                    DateFrom = x.CheckInDate,
-                    DateTo = x.CheckOutDate,
-                    RoomId = x.RoomId,
-                    RoomNumber = x.Room.RoomNumber,
-                    ReservationKey = x.ReservationKey,
-                    ReservationId = x.Id
-                });
+                var reservations = this._unitOfWork.Reservations.GetAll().Where(x => x.Status == status)
+                    .Select(x => new ReservationViewModel()
+                    {
+                        CustomerId = x.CustomerId,
+                        CreateDateTime = x.CreateDateTime,
+                        DateFrom = x.CheckInDate,
+                        DateTo = x.CheckOutDate,
+                        RoomId = x.RoomId,
+                        RoomNumber = x.Room.RoomNumber,
+                        ReservationKey = x.ReservationKey,
+                        ReservationId = x.Id,
+                        Status = x.Status
+                    });
                 return Ok(reservations);
             }
             catch (Exception e)
@@ -85,97 +74,38 @@ namespace RemoteHotel.WebApi.Controllers
                 throw;
             }
         }
-
+        [HttpGet]
+        [Route("reservations")]
+        public IHttpActionResult GetAllReservations()
+        {
+            try
+            {
+                var reservations = this._unitOfWork.Reservations.GetAll()
+                    .Select(x => new ReservationViewModel()
+                    {
+                        CustomerId = x.CustomerId,
+                        CreateDateTime = x.CreateDateTime,
+                        DateFrom = x.CheckInDate,
+                        DateTo = x.CheckOutDate,
+                        RoomId = x.RoomId,
+                        RoomNumber = x.Room.RoomNumber,
+                        ReservationKey = x.ReservationKey,
+                        ReservationId = x.Id,
+                        Status = x.Status
+                    });
+                return Ok(reservations);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         [HttpPut]
         [Route("reservations")]
         public IHttpActionResult EditReservation([FromBody]ReservationViewModel reservation)
         {
             return BadRequest();
         }
-
-        //[HttpGet]
-        //[Route("freeRooms")]
-        //public IHttpActionResult GetFreeRooms(DateTime checkInDateTime, DateTime checkOutDateTime)
-        //{
-        //    try
-        //    {
-        //        var rooms = this._unitOfWork.Rooms.GetAll()
-        //            .Where(x => x.Reservations.Any(z =>
-        //                z.CheckInDate >= checkInDateTime && z.CheckOutDate <= checkOutDateTime))
-        //            .Select(x => new RoomViewModel
-        //            {
-        //                RoomNumber = x.RoomNumber,
-        //                Beds = x.Beds,
-        //                SingleBeds = x.SingleBeds,
-        //                DoubleBeds = x.DoubleBeds,
-        //                Description = x.Description
-        //            });
-        //        return Ok(rooms);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
-
-        public class AccessLogViewModel
-        {
-            public int LogId { get; set; }
-            public DateTime CreateDate { get; set; }
-            public string PasswordHash { get; set; }
-            public string Info { get; set; }
-            public bool Status { get; set; }
-        }
-
-        //[HttpGet]
-        //[Route("accessLogs")]
-        //public IHttpActionResult GetAllAccessLogs()
-        //{
-        //    try
-        //    {
-        //        var accessLogs = this._unitOfWork.AccessLogs.GetAll().Select(x =>
-        //        {
-        //            var accessLog = new AccessLogViewModel
-        //            {
-        //                LogId = x.Id,
-        //                CreateDate = x.CreateDate,
-        //                PasswordHash = x.PasswordHash,
-        //                Info = x.Info,
-        //                Status = x.Status
-        //            };
-        //            return accessLog;
-        //        });
-        //        return Ok(accessLogs);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.BadRequest);
-        //    }
-        //}
-
-        //[HttpGet]
-        ////[Route("reservations")]
-        //public IHttpActionResult GetAllReservations()
-        //{
-        //    try
-        //    {
-        //        var reservations = this._unitOfWork.Reservations.GetAll().Select(
-        //            x => new ReservationListItemViewModel
-        //            {
-        //                FirstName = x.Customer.FirstName,
-        //                CheckInDate = x.CheckInDate,
-        //                CheckOutDate = x.CheckOutDate,
-        //                RoomNumber = x.Room.RoomNumber
-        //            });
-        //        return Ok(reservations);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine();
-        //        throw;
-        //    }
-        //}
-
     }
 }

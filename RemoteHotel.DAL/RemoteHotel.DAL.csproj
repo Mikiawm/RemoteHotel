@@ -102,6 +102,14 @@
     <Compile Include="Migrations\201902092247586_09-02-2019.Designer.cs">
       <DependentUpon>201902092247586_09-02-2019.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902121658441_12-02-2019.cs" />
+    <Compile Include="Migrations\201902121658441_12-02-2019.Designer.cs">
+      <DependentUpon>201902121658441_12-02-2019.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902161336056_16-02-2019.cs" />
+    <Compile Include="Migrations\201902161336056_16-02-2019.Designer.cs">
+      <DependentUpon>201902161336056_16-02-2019.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessLog.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -125,6 +133,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902092247586_09-02-2019.resx">
       <DependentUpon>201902092247586_09-02-2019.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902121658441_12-02-2019.resx">
+      <DependentUpon>201902121658441_12-02-2019.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902161336056_16-02-2019.resx">
+      <DependentUpon>201902161336056_16-02-2019.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
